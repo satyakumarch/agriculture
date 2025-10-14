@@ -7,7 +7,7 @@ interface SensorData {
   id: string;
   name: string;
   location: string;
-  type: 'temperature' | 'moisture' | 'humidity' | 'wind';
+  type: 'temperature' | 'moisture' | 'humidity' | 'wind' | 'rainfall';
   value: number;
   unit: string;
   timestamp: string;

@@ -10,11 +10,8 @@ const AdditionalFeaturesSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-block bg-green-100 dark:bg-green-900/30 rounded-full px-3 py-1 text-sm font-medium text-green-800 dark:text-green-300 mb-3">
-<<<<<<< HEAD
               More Features
-=======
               More Features Coming Soon
->>>>>>> 64f66eb (updating the website)
             </div>
             <h2 className="text-3xl font-bold mb-6">Advanced Tools for Modern Agriculture</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8">

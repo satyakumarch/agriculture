@@ -12,7 +12,7 @@ interface SensorData {
   id: string;
   name: string;
   location: string;
-  type: 'moisture' | 'temperature' | 'humidity' | 'wind';
+  type: 'moisture' | 'temperature' | 'humidity' | 'wind' | 'rainfall';
   value: number;
   unit: string;
   timestamp: string;
@@ -52,42 +52,6 @@ const IoTMonitoring = () => {
     },
     {
       id: 'sensor-3',
-      name: 'Humidity Sensor',
-      location: 'Greenhouse 1',
-      type: 'humidity' as const,
-      value: 68,
-      unit: '%',
-      timestamp: new Date().toISOString(),
-      batteryLevel: 91,
-      signalStrength: 88,
-      status: 'normal' as const,
-    },
-    {
-      id: 'sensor-4',
-      name: 'Soil Moisture Sensor',
-      location: 'South Field - Plot C',
-      type: 'moisture' as const,
-      value: 18,
-      unit: '%',
-      timestamp: new Date().toISOString(),
-      batteryLevel: 42,
-      signalStrength: 76,
-      status: 'warning' as const,
-    },
-    {
-      id: 'sensor-5',
-      name: 'Temperature Sensor',
-      location: 'Open Field',
-      type: 'temperature' as const,
-      value: 32.8,
-      unit: '°C',
-      timestamp: new Date().toISOString(),
-      batteryLevel: 55,
-      signalStrength: 81,
-      status: 'warning' as const,
-    },
-    {
-      id: 'sensor-6',
       name: 'Wind Sensor',
       location: 'Weather Station',
       type: 'wind' as const,
@@ -99,29 +63,17 @@ const IoTMonitoring = () => {
       status: 'normal' as const,
     },
     {
-      id: 'sensor-7',
-      name: 'Soil Moisture Sensor',
-      location: 'Irrigation Zone 3',
-      type: 'moisture' as const,
-      value: 8,
-      unit: '%',
-      timestamp: new Date().toISOString(),
-      batteryLevel: 23,
-      signalStrength: 62,
-      status: 'critical' as const,
-    },
-    {
-      id: 'sensor-8',
-      name: 'Temperature Sensor',
-      location: 'Storage Facility',
-      type: 'temperature' as const,
-      value: 18.2,
-      unit: '°C',
-      timestamp: new Date().toISOString(),
-      batteryLevel: 81,
-      signalStrength: 89,
-      status: 'normal' as const,
-    }
+    id: 'sensor-4',
+    name: 'Rainfall Sensor',
+    location: 'South Field - Irrigation Zone',
+    type: 'rainfall' as const,
+    value: 4.2,
+    unit: 'mm',
+    timestamp: new Date().toISOString(),
+    batteryLevel: 82,
+    signalStrength: 90,
+    status: 'normal' as const,
+  },
   ]);
 
   const handleAddSensor = (newSensor: SensorData) => {
