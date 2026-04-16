@@ -13,6 +13,15 @@ import DiseaseScanner from '@/pages/DiseaseScanner';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
 import LaborManagement from '@/pages/LaborManagement';
+import AIDecisionEngine from '@/pages/AIDecisionEngine';
+import VoiceAssistant from '@/pages/VoiceAssistant';
+import ProfitPrediction from '@/pages/ProfitPrediction';
+import GovernmentSchemes from '@/pages/GovernmentSchemes';
+import FarmerCommunity from '@/pages/FarmerCommunity';
+import Marketplace from '@/pages/Marketplace';
+import FarmDigitalTwin from '@/pages/FarmDigitalTwin';
+import LearningHub from '@/pages/LearningHub';
+import EmergencySOS from '@/pages/EmergencySOS';
 
 const App = () => {
   return (
@@ -28,6 +37,15 @@ const App = () => {
         <Route path="/disease-scanner" element={<DiseaseScanner />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/labor-management" element={<LaborManagement />} />
+        <Route path="/ai-decision-engine" element={<AIDecisionEngine />} />
+        <Route path="/voice-assistant" element={<VoiceAssistant />} />
+        <Route path="/profit-prediction" element={<ProfitPrediction />} />
+        <Route path="/government-schemes" element={<GovernmentSchemes />} />
+        <Route path="/community" element={<FarmerCommunity />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/farm-digital-twin" element={<FarmDigitalTwin />} />
+        <Route path="/learning-hub" element={<LearningHub />} />
+        <Route path="/emergency-sos" element={<EmergencySOS />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatedPage>

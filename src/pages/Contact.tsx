@@ -113,7 +113,7 @@ const Contact = () => {
                         Main Office:+91 8934856824<br />
                         Customer Support: (123) 456-7891<br />
                         Technical Help: (123) 456-7892
-                      </p>
+                      </p> 
                     </div>
                   </div>
 
