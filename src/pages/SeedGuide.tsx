@@ -281,90 +281,327 @@ const SeedGuide = () => {
                     <h3 className="text-2xl font-bold mb-2">🌱 Full Catalog – Seed Guide</h3>
                     <p className="text-muted-foreground">Complete collection of seeds for all your farming needs</p>
                   </div>
-                  
+
                   {/* Vegetables Section */}
                   <div className="glass-card p-6">
                     <h4 className="text-xl font-semibold mb-6 text-green-600 dark:text-green-400">1. Vegetables</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="border rounded-lg p-4 bg-background/50">
-                        <h5 className="font-medium text-lg mb-2">Tomato (Hybrid Red King)</h5>
-                        <p className="text-sm text-muted-foreground mb-3">High-yield hybrid variety with firm, bright red fruits.</p>
-                        <div className="space-y-1 text-sm">
-                          <div><span className="font-medium">Growth Duration:</span> 70–80 days</div>
-                          <div><span className="font-medium">Climate/Soil:</span> Well-drained loamy soil, warm climate</div>
-                          <div><span className="font-medium">Yield Potential:</span> 25–30 tons/acre</div>
-                          <div><span className="font-medium">Care Tips:</span> Requires staking; regular watering needed</div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600&q=80"
+                          alt="Tomato Hybrid Red King"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Tomato (Hybrid Red King)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">High-yield hybrid variety with firm, bright red fruits.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 70–80 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Well-drained loamy soil, warm climate</div>
+                            <div><span className="font-medium">Yield Potential:</span> 25–30 tons/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Requires staking; regular watering needed</div>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="border rounded-lg p-4 bg-background/50">
-                        <h5 className="font-medium text-lg mb-2">Spinach (Green Glory)</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Fast-growing leafy vegetable, rich in iron.</p>
-                        <div className="space-y-1 text-sm">
-                          <div><span className="font-medium">Growth Duration:</span> 35–40 days</div>
-                          <div><span className="font-medium">Climate/Soil:</span> Prefers cool climate, moist sandy-loam soil</div>
-                          <div><span className="font-medium">Yield Potential:</span> 10–12 tons/acre</div>
-                          <div><span className="font-medium">Care Tips:</span> Continuous harvesting possible by cutting outer leaves</div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&q=80"
+                          alt="Spinach Green Glory"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Spinach (Green Glory)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Fast-growing leafy vegetable, rich in iron.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 35–40 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Prefers cool climate, moist sandy-loam soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 10–12 tons/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Continuous harvesting possible by cutting outer leaves</div>
+                          </div>
                         </div>
                       </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&q=80"
+                          alt="Potato"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Potato (Kufri Jyoti)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Popular table variety with smooth skin and high starch content.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 90–110 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Cool climate, well-drained loamy soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 15–20 tons/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Earthing up required; avoid waterlogging</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1566842600175-97dca489844f?w=600&q=80"
+                          alt="Onion"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Onion (Nasik Red)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Deep red bulbs with pungent flavour, excellent shelf life.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 120–130 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Dry climate, well-drained sandy loam</div>
+                            <div><span className="font-medium">Yield Potential:</span> 12–18 tons/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Reduce irrigation 2 weeks before harvest</div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
-                  
+
                   {/* Fruits Section */}
                   <div className="glass-card p-6">
                     <h4 className="text-xl font-semibold mb-6 text-orange-600 dark:text-orange-400">2. Fruits</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="border rounded-lg p-4 bg-background/50">
-                        <h5 className="font-medium text-lg mb-2">Watermelon (Sugar Star)</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Sweet, large-sized fruits with bright red flesh.</p>
-                        <div className="space-y-1 text-sm">
-                          <div><span className="font-medium">Growth Duration:</span> 90–100 days</div>
-                          <div><span className="font-medium">Climate/Soil:</span> Hot climate, sandy-loam soil with good drainage</div>
-                          <div><span className="font-medium">Yield Potential:</span> 30–35 tons/acre</div>
-                          <div><span className="font-medium">Care Tips:</span> Requires full sun; avoid waterlogging</div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80"
+                          alt="Watermelon Sugar Star"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Watermelon (Sugar Star)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Sweet, large-sized fruits with bright red flesh.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 90–100 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Hot climate, sandy-loam soil with good drainage</div>
+                            <div><span className="font-medium">Yield Potential:</span> 30–35 tons/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Requires full sun; avoid waterlogging</div>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="border rounded-lg p-4 bg-background/50">
-                        <h5 className="font-medium text-lg mb-2">Papaya (Golden Sunrise)</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Medium-height variety with yellow-orange pulp, good for table use.</p>
-                        <div className="space-y-1 text-sm">
-                          <div><span className="font-medium">Growth Duration:</span> 9–11 months for fruiting</div>
-                          <div><span className="font-medium">Climate/Soil:</span> Tropical climate, well-drained sandy loam soil</div>
-                          <div><span className="font-medium">Yield Potential:</span> 40–60 kg per plant annually</div>
-                          <div><span className="font-medium">Care Tips:</span> Protect from frost; irrigation at regular intervals</div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?w=600&q=80"
+                          alt="Papaya Golden Sunrise"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Papaya (Golden Sunrise)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Medium-height variety with yellow-orange pulp, good for table use.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 9–11 months for fruiting</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Tropical climate, well-drained sandy loam soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 40–60 kg per plant annually</div>
+                            <div><span className="font-medium">Care Tips:</span> Protect from frost; irrigation at regular intervals</div>
+                          </div>
                         </div>
                       </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&q=80"
+                          alt="Mango Alphonso"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Mango (Alphonso)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">King of mangoes — rich aroma, sweet pulp, premium export quality.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 3–5 years (first fruit)</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Tropical, deep well-drained alluvial soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 100–200 fruits/tree/year</div>
+                            <div><span className="font-medium">Care Tips:</span> Prune after harvest; apply potash before flowering</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600&q=80"
+                          alt="Banana"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Banana (Grand Naine)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Dwarf Cavendish type, high bunch weight, disease resistant.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 11–13 months</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Humid tropical, rich loamy soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 25–35 tons/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Remove suckers; prop bunches to prevent lodging</div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
-                  
+
                   {/* Flowers Section */}
                   <div className="glass-card p-6">
                     <h4 className="text-xl font-semibold mb-6 text-pink-600 dark:text-pink-400">3. Flowers</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="border rounded-lg p-4 bg-background/50">
-                        <h5 className="font-medium text-lg mb-2">Marigold (Orange Delight)</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Popular ornamental flower with bright orange blooms.</p>
-                        <div className="space-y-1 text-sm">
-                          <div><span className="font-medium">Growth Duration:</span> 60–70 days</div>
-                          <div><span className="font-medium">Climate/Soil:</span> Grows well in sandy-loam soil; moderate climate</div>
-                          <div><span className="font-medium">Yield Potential:</span> 12–15 tons of flowers/acre</div>
-                          <div><span className="font-medium">Care Tips:</span> Pinching improves branching and flower size</div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=600&q=80"
+                          alt="Marigold Orange Delight"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Marigold (Orange Delight)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Popular ornamental flower with bright orange blooms.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 60–70 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Grows well in sandy-loam soil; moderate climate</div>
+                            <div><span className="font-medium">Yield Potential:</span> 12–15 tons of flowers/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Pinching improves branching and flower size</div>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="border rounded-lg p-4 bg-background/50">
-                        <h5 className="font-medium text-lg mb-2">Sunflower (Golden Shine)</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Large, bright yellow flowers, also grown for seeds.</p>
-                        <div className="space-y-1 text-sm">
-                          <div><span className="font-medium">Growth Duration:</span> 90–100 days</div>
-                          <div><span className="font-medium">Climate/Soil:</span> Warm climate, fertile loam soil with good drainage</div>
-                          <div><span className="font-medium">Yield Potential:</span> 8–10 quintals seeds/acre</div>
-                          <div><span className="font-medium">Care Tips:</span> Ensure spacing for large flower heads</div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=600&q=80"
+                          alt="Sunflower Golden Shine"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Sunflower (Golden Shine)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Large, bright yellow flowers, also grown for seeds.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 90–100 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Warm climate, fertile loam soil with good drainage</div>
+                            <div><span className="font-medium">Yield Potential:</span> 8–10 quintals seeds/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Ensure spacing for large flower heads</div>
+                          </div>
                         </div>
                       </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1490750967868-88df5691cc5e?w=600&q=80"
+                          alt="Rose"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Rose (Hybrid Tea)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Classic cut flower with large blooms and long stems.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 45–60 days (first flush)</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Mild climate, well-drained fertile loam</div>
+                            <div><span className="font-medium">Yield Potential:</span> 80,000–1,00,000 stems/acre/year</div>
+                            <div><span className="font-medium">Care Tips:</span> Prune after each flush; spray for black spot</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                          alt="Jasmine"
+                          className="w-full h-44 object-cover object-top"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Jasmine (Mogra)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Fragrant white flowers, high demand for garlands and perfume.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 6–8 months (first bloom)</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Warm humid climate, well-drained loamy soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 3–5 tons/acre/year</div>
+                            <div><span className="font-medium">Care Tips:</span> Prune after flowering season; apply organic manure</div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
+
+                  {/* Field Crops Section */}
+                  <div className="glass-card p-6">
+                    <h4 className="text-xl font-semibold mb-6 text-yellow-600 dark:text-yellow-400">4. Field Crops</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80"
+                          alt="Wheat"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Wheat (HD-2967)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">High-yielding certified wheat, resistant to rust and lodging.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 120–130 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Cool dry climate, loamy soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 18–22 quintals/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Irrigate at crown root initiation stage</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=600&q=80"
+                          alt="Rice"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Rice (Pusa Basmati 1121)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">Premium long-grain basmati with excellent aroma and export demand.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 140–145 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Humid, clay or clay-loam soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 15–18 quintals/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Maintain 2–5 cm standing water; weed at 20 days</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600&q=80"
+                          alt="Corn Maize"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Corn / Maize (DKC 9144)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">High-yield hybrid maize with strong stalk and disease tolerance.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 95–105 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Warm climate, well-drained fertile loam</div>
+                            <div><span className="font-medium">Yield Potential:</span> 25–30 quintals/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Top-dress urea at knee-height stage</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
+                        <img
+                          src="https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?w=600&q=80"
+                          alt="Soybean"
+                          className="w-full h-44 object-cover"
+                        />
+                        <div className="p-4">
+                          <h5 className="font-medium text-lg mb-1">Soybean (JS 335)</h5>
+                          <p className="text-sm text-muted-foreground mb-3">High protein content, suitable for oil extraction and animal feed.</p>
+                          <div className="space-y-1 text-sm">
+                            <div><span className="font-medium">Growth Duration:</span> 95–100 days</div>
+                            <div><span className="font-medium">Climate/Soil:</span> Warm humid, well-drained black cotton soil</div>
+                            <div><span className="font-medium">Yield Potential:</span> 10–14 quintals/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Seed treatment with Rhizobium culture improves yield</div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
                 </div>
               </TabsContent>
             </Tabs>

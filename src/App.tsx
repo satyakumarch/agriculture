@@ -12,7 +12,6 @@ import IoTMonitoring from '@/pages/IoTMonitoring';
 import DiseaseScanner from '@/pages/DiseaseScanner';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import LaborManagement from '@/pages/LaborManagement';
 import AIDecisionEngine from '@/pages/AIDecisionEngine';
 import VoiceAssistant from '@/pages/VoiceAssistant';
 import ProfitPrediction from '@/pages/ProfitPrediction';
@@ -36,7 +35,6 @@ const App = () => {
         <Route path="/iot-monitoring" element={<IoTMonitoring />} />
         <Route path="/disease-scanner" element={<DiseaseScanner />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/labor-management" element={<LaborManagement />} />
         <Route path="/ai-decision-engine" element={<AIDecisionEngine />} />
         <Route path="/voice-assistant" element={<VoiceAssistant />} />
         <Route path="/profit-prediction" element={<ProfitPrediction />} />

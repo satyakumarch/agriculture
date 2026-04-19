@@ -24,8 +24,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'Inter', 'sans-serif'],
+        heading: ['Poppins', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -33,8 +35,15 @@ export default {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        
-        // Custom AgriAssist colors
+
+        // ── AgriAssist Brand Palette ──
+        brand: {
+          green:      '#2E7D32',
+          'green-light': '#A5D6A7',
+          'green-dark':  '#1B5E20',
+          accent:     '#388E3C',
+          bg:         '#F5F7F6',
+        },
         'green': {
           '50': '#f0f7f0',
           '100': '#dceadc',
@@ -151,18 +160,39 @@ export default {
         'bounce-gentle': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' }
-        }
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
-        'fade-up': 'fade-up 0.7s ease-out',
+        'fade-up': 'fade-up 0.6s ease-out',
         'pulse-slow': 'pulse-slow 3s infinite',
-        'slide-in-left': 'slide-in-left 0.6s ease-out',
-        'slide-in-right': 'slide-in-right 0.6s ease-out',
-        'bounce-gentle': 'bounce-gentle 2s infinite'
-      }
+        'slide-in-left': 'slide-in-left 0.5s ease-out',
+        'slide-in-right': 'slide-in-right 0.5s ease-out',
+        'bounce-gentle': 'bounce-gentle 2s infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'scale-in': 'scale-in 0.3s ease-out',
+        'slide-up': 'slide-up 0.5s ease-out',
+      },
+      boxShadow: {
+        'agri': '0 4px 24px rgba(46, 125, 50, 0.12)',
+        'agri-lg': '0 8px 40px rgba(46, 125, 50, 0.18)',
+        'card': '0 2px 16px rgba(0,0,0,0.06)',
+        'card-hover': '0 8px 32px rgba(0,0,0,0.12)',
+      },
     }
   },
   plugins: [require("tailwindcss-animate")],

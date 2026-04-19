@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/hooks/use-language';
 
 // Import the utility functions
 import { formatDate, mapWeatherTypeFromCode } from '@/components/weather/WeatherUtils';
@@ -14,7 +15,7 @@ import Header from '@/components/weather/Header';
 import SearchBar from '@/components/weather/SearchBar';
 import CurrentWeatherTab from '@/components/weather/CurrentWeatherTab';
 import ForecastTab from '@/components/weather/ForecastTab';
-import AgriculturalTab from '@/components/weather/AgriculturalTab';
+import AgriculturalCalendar from '@/components/weather/AgriculturalCalendar';
 import WeatherFeatures from '@/components/weather/WeatherFeatures';
 
 const Weather = () => {
@@ -24,6 +25,7 @@ const Weather = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const API_KEY = '8d2de98e089f1c28e1a22fc19a24ef04'; // Example API key for demo
 
@@ -94,15 +96,12 @@ const Weather = () => {
         }
       });
       
-      const limitedForecasts = dailyForecasts.slice(0, 4);
+      const limitedForecasts = dailyForecasts.slice(0, 5);
       
       setWeatherData(formattedCurrent);
       setForecastData(limitedForecasts);
       
-      toast({
-        title: "Weather updated",
-        description: `Showing weather for ${formattedCurrent.location}`,
-      });
+      toast({ title: t.weather.weatherUpdated, description: `${t.weather.showingWeatherFor} ${formattedCurrent.location}` });
     } catch (err: any) {
       console.error('Weather fetch error:', err);
       setError(err.message);
@@ -163,10 +162,10 @@ const Weather = () => {
               <>
                 {weatherData && (
                   <Tabs defaultValue="current" className="mb-12">
-                    <TabsList className="w-full max-w-md mx-auto grid grid-cols-3 mb-8">
-                      <TabsTrigger value="current">Current</TabsTrigger>
-                      <TabsTrigger value="forecast">Forecast</TabsTrigger>
-                      <TabsTrigger value="agricultural">Agricultural</TabsTrigger>
+                    <TabsList className="w-full max-w-sm mx-auto grid grid-cols-3 mb-8">
+                      <TabsTrigger value="current">{t.weather.current}</TabsTrigger>
+                      <TabsTrigger value="forecast">{t.weather.forecast}</TabsTrigger>
+                      <TabsTrigger value="calendar">{t.weather.calendar}</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="current">
@@ -176,9 +175,9 @@ const Weather = () => {
                     <TabsContent value="forecast">
                       <ForecastTab forecastData={forecastData} weatherData={weatherData} />
                     </TabsContent>
-                    
-                    <TabsContent value="agricultural">
-                      <AgriculturalTab weatherData={weatherData} />
+
+                    <TabsContent value="calendar">
+                      <AgriculturalCalendar weatherData={weatherData} />
                     </TabsContent>
                   </Tabs>
                 )}

@@ -9,6 +9,7 @@ import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
 import ThemeToggle from './ThemeToggle';
 import AuthButtons from './AuthButtons';
+import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -72,7 +73,8 @@ const Navbar = () => {
         <DesktopNav />
         
         {/* Action Buttons */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-3">
+          <LanguageSelector />
           {mounted && <ThemeToggle />}
           <AuthButtons 
             isAuthenticated={isAuthenticated} 

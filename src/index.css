@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,83 +7,73 @@
 
 @layer base {
   :root {
+    /* ── AgriAssist Brand Colors ── */
+    --agri-green:       #2E7D32;
+    --agri-green-light: #A5D6A7;
+    --agri-green-dark:  #1B5E20;
+    --agri-bg:          #F5F7F6;
+    --agri-accent:      #388E3C;
+
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
-
     --card: 0 0% 98%;
     --card-foreground: 0 0% 5%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
-
-    --primary: 0 0% 20%;
+    --primary: 123 41% 34%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 85%;
-    --secondary-foreground: 0 0% 15%;
-
-    --muted: 0 0% 95%;
+    --secondary: 123 20% 80%;
+    --secondary-foreground: 123 41% 20%;
+    --muted: 120 10% 95%;
     --muted-foreground: 0 0% 40%;
-
-    --accent: 0 0% 90%;
-    --accent-foreground: 0 0% 10%;
-
+    --accent: 123 30% 90%;
+    --accent-foreground: 123 41% 20%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 85%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 20%;
-
-    --radius: 0.75rem;
+    --border: 120 10% 88%;
+    --input: 120 10% 92%;
+    --ring: 123 41% 34%;
+    --radius: 0.875rem;
 
     --sidebar-background: 120 30% 98%;
     --sidebar-foreground: 120 10% 10%;
-    --sidebar-primary: 120 25% 40%;
+    --sidebar-primary: 123 41% 34%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 120 5% 92%;
     --sidebar-accent-foreground: 120 10% 10%;
     --sidebar-border: 120 5% 90%;
-    --sidebar-ring: 120 25% 40%;
+    --sidebar-ring: 123 41% 34%;
   }
 
   .dark {
-    --background: 0 0% 5%;
+    --background: 123 15% 7%;
     --foreground: 0 0% 95%;
-
-    --card: 0 0% 8%;
+    --card: 123 12% 10%;
     --card-foreground: 0 0% 92%;
-
-    --popover: 0 0% 5%;
+    --popover: 123 12% 8%;
     --popover-foreground: 0 0% 95%;
-
-    --primary: 0 0% 80%;
-    --primary-foreground: 0 0% 10%;
-
-    --secondary: 0 0% 15%;
+    --primary: 123 35% 55%;
+    --primary-foreground: 0 0% 5%;
+    --secondary: 123 15% 20%;
     --secondary-foreground: 0 0% 85%;
-
-    --muted: 0 0% 12%;
+    --muted: 123 10% 14%;
     --muted-foreground: 0 0% 60%;
-
-    --accent: 0 0% 18%;
+    --accent: 123 15% 18%;
     --accent-foreground: 0 0% 90%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 95%;
+    --border: 123 10% 22%;
+    --input: 123 10% 17%;
+    --ring: 123 35% 55%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 80%;
-
-    --sidebar-background: 120 15% 10%;
+    --sidebar-background: 123 15% 10%;
     --sidebar-foreground: 120 5% 96%;
-    --sidebar-primary: 120 25% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 120 15% 18%;
+    --sidebar-primary: 123 35% 55%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 123 15% 18%;
     --sidebar-accent-foreground: 120 5% 96%;
-    --sidebar-border: 120 15% 20%;
-    --sidebar-ring: 120 25% 40%;
+    --sidebar-border: 123 15% 20%;
+    --sidebar-ring: 123 35% 55%;
   }
 }
 
@@ -92,95 +82,121 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans;
-    animation: fade-in 0.8s ease-out;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--agri-bg);
+    animation: fade-in 0.5s ease-out;
   }
 
+  /* Headings use Poppins */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-semibold tracking-tight;
+    font-family: 'Poppins', sans-serif;
+    @apply font-bold tracking-tight;
   }
 
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl;
-  }
-
-  h5 {
-    @apply text-lg md:text-xl;
-  }
-
-  h6 {
-    @apply text-base md:text-lg font-medium;
-  }
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+  h5 { @apply text-lg md:text-xl; }
+  h6 { @apply text-base md:text-lg font-semibold; }
 
   ::selection {
-    @apply bg-green-300/30 text-foreground;
+    background: #A5D6A7;
+    color: #1B5E20;
   }
-  
-  /* Fix for theme transition */
-  html.dark {
-    color-scheme: dark;
-  }
+
+  html.dark { color-scheme: dark; }
 }
 
 @layer components {
+
+  /* ── Glass card — consistent shadow + radius ── */
   .glass-card {
-    @apply bg-white/90 dark:bg-black/80 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg;
-    animation: fade-up 0.6s ease-out;
+    @apply bg-white/90 dark:bg-black/80 backdrop-blur-md
+           border border-gray-200/70 dark:border-gray-700/60
+           rounded-2xl shadow-md;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
   }
-  
+
+  /* ── Feature card — lift on hover ── */
   .feature-card {
-    @apply relative overflow-hidden rounded-xl p-6 glass-card transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:bg-white dark:hover:bg-black/90;
-    animation: slide-in-left 0.8s ease-out;
+    @apply glass-card p-6 cursor-pointer;
+  }
+  .feature-card:hover {
+    @apply shadow-xl;
+    transform: translateY(-4px);
   }
 
+  /* ── Nav link — underline slide ── */
   .nav-link {
-    @apply relative px-3 py-2 text-foreground/70 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100;
+    @apply relative px-3 py-2 text-foreground/70 hover:text-foreground
+           transition-colors duration-200;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-green-600
+           scale-x-0 transition-transform duration-300 origin-left;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .active-nav-link { @apply text-foreground; }
+  .active-nav-link::after { transform: scaleX(1); }
+
+  /* ── Buttons — smooth color transition ── */
+  button, .btn {
+    transition: background-color 0.2s ease, box-shadow 0.2s ease,
+                transform 0.15s ease, color 0.2s ease;
+  }
+  button:active { transform: scale(0.97); }
+
+  /* ── Cards hover lift (generic) ── */
+  .hover-lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    @apply shadow-xl;
   }
 
-  .active-nav-link {
-    @apply text-foreground after:scale-x-100;
-  }
-  
+  /* ── Animated gradient background ── */
   .animated-gradient {
     background-size: 200% 200%;
-    animation: gradientAnimation 5s ease infinite;
+    animation: gradientAnimation 6s ease infinite;
   }
-  
+
+  /* ── Section fade-in on scroll ── */
+  .section-animate {
+    animation: fade-up 0.7s ease-out both;
+  }
+
+  /* ── Premium input focus ring ── */
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+  }
+
+  /* ── Scrollbar styling ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: #A5D6A7;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #2E7D32; }
+
+  /* ── Fullscreen ── */
+  :fullscreen, :-webkit-full-screen, :-ms-fullscreen {
+    @apply w-full h-full overflow-y-auto bg-background;
+  }
+
   @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  /* Fullscreen styles */
-  :fullscreen {
-    @apply w-full h-full overflow-y-auto bg-background;
-  }
-  
-  :-webkit-full-screen {
-    @apply w-full h-full overflow-y-auto bg-background;
-  }
-  
-  :-ms-fullscreen {
-    @apply w-full h-full overflow-y-auto bg-background;
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 }
