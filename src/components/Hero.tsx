@@ -6,22 +6,45 @@ import GetStartedModal from '@/components/modals/GetStartedModal';
 import ExploreFeaturesModal from '@/components/modals/ExploreFeaturesModal';
 import { useLanguage } from '@/hooks/use-language';
 
-// Using your confirmed YouTube Short — plays reliably, no unavailable error
-// Each slot uses the same video but different start points for variety
-const heroVideos = [
-  { id: 'O4iuA4Q0zIo', start: 0,  label: '🌾 My Farm' },
-  { id: 'O4iuA4Q0zIo', start: 5,  label: '🌱 Agriculture' },
-  { id: 'O4iuA4Q0zIo', start: 10, label: '🚜 Smart Farming' },
-  { id: 'O4iuA4Q0zIo', start: 15, label: '🌾 Crop Fields' },
-];
-
 const Hero = () => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const navigate = useNavigate();
   const [getStartedModalOpen, setGetStartedModalOpen] = useState(false);
   const [exploreFeaturesModalOpen, setExploreFeaturesModalOpen] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState(0);
+
+  // Pause video when scrolled out of view, resume when back in view
+  useEffect(() => {
+    const container = videoContainerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const iframe = iframeRef.current;
+          if (!iframe?.contentWindow) return;
+          if (entry.isIntersecting) {
+            // Resume — send playVideo command
+            iframe.contentWindow.postMessage(
+              JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*'
+            );
+          } else {
+            // Pause — send pauseVideo command
+            iframe.contentWindow.postMessage(
+              JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'
+            );
+          }
+        });
+      },
+      { threshold: 0.3 } // pause when less than 30% visible
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -33,20 +56,6 @@ const Hero = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  // Auto-rotate every 30 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentVideo(v => (v + 1) % heroVideos.length);
-    }, 30000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const ytSrc = (id: string) =>
-    `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1`;
-
-  const getEmbedSrc = (video: typeof heroVideos[0]) =>
-    `https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}&controls=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&start=${video.start}`;
 
   return (
     <div
@@ -80,6 +89,18 @@ const Hero = () => {
                 {t.hero.title2}
               </span>
             </h1>
+            {/* Hindi Tagline */}
+            <div className="bg-gradient-to-r from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/30 rounded-2xl p-5 border-l-4 border-green-600 my-6">
+              <p className="text-lg md:text-xl font-bold text-green-800 dark:text-green-300 mb-2">
+                कल की खेती आज के हाथों में।
+              </p>
+              <p className="text-base text-green-700 dark:text-green-400">
+                AgriAssist के साथ अपने भविष्य को सुरक्षित और समृद्ध बनाएं।
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 italic">
+                Tomorrow's farming in today's hands. Make your future secure and prosperous with AgriAssist.
+              </p>
+            </div>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl">
               {t.hero.description}
             </p>
@@ -94,43 +115,27 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right: Video — bigger frame */}
+          {/* Right: Local Farmer Video */}
           <div className="lg:w-1/2 w-full">
             <div className="relative">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-green-600/30 to-sky-400/30 blur-2xl scale-105"></div>
 
               <div className="relative glass-card p-1.5 overflow-hidden rounded-3xl shadow-2xl">
-                {/* YouTube iframe — autoplay, muted, loop, no blank screen */}
-                <div className="relative w-full rounded-2xl overflow-hidden" style={{ height: '520px' }}>
-                  <iframe
-                    key={currentVideo}
-                    src={getEmbedSrc(heroVideos[currentVideo])}
-                    title={heroVideos[currentVideo].label}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full border-0 rounded-2xl"
-                    style={{ pointerEvents: 'none' }}
+                <div
+                  ref={videoContainerRef}
+                  className="relative w-full rounded-2xl overflow-hidden"
+                  style={{ height: '520px' }}
+                >
+                  <video
+                    ref={iframeRef as unknown as React.RefObject<HTMLVideoElement>}
+                    src="/farmer-video.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    className="absolute inset-0 w-full h-full object-cover rounded-2xl"
                   />
-                  {/* Transparent overlay to block YouTube click-through while keeping controls */}
-                  <div className="absolute inset-0 rounded-2xl" style={{ pointerEvents: 'none' }} />
-                </div>
-
-                {/* Controls overlay */}
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                  <span className="bg-green-600/90 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm font-medium">
-                    {heroVideos[currentVideo].label}
-                  </span>
-                  {/* Dot selector */}
-                  <div className="flex gap-1.5">
-                    {heroVideos.map((v, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setCurrentVideo(i)}
-                        className={`rounded-full transition-all ${currentVideo === i ? 'w-5 h-2 bg-white' : 'w-2 h-2 bg-white/60 hover:bg-white/90'}`}
-                        title={v.label}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>

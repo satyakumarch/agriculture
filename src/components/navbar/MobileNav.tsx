@@ -21,19 +21,20 @@ const MobileNav = ({ isAuthenticated, user, mounted, handleLogout }: MobileNavPr
 
   const navGroups = [
     {
+      label: '🌾 Farm Tools',
+      items: [
+        { to: '/seed-guide', label: '🌱 ' + t.nav.seedGuide },
+        { to: '/weather',    label: '🌤️ ' + t.nav.weather },
+        { to: '/drone',      label: '🚁 Drone Intelligence' },
+      ],
+    },
+    {
       label: t.nav.aiTools,
       items: [
         { to: '/ai-decision-engine', label: t.nav.aiDecisionEngine },
         { to: '/voice-assistant',    label: t.nav.voiceAssistant },
         { to: '/profit-prediction',  label: t.nav.profitPrediction },
         { to: '/disease-scanner',    label: t.nav.diseaseScanner },
-      ],
-    },
-    {
-      label: t.nav.farmManagement,
-      items: [
-        { to: '/expense-tracker', label: t.nav.expenseTracker },
-        { to: '/iot-monitoring',  label: t.nav.iotMonitoring },
       ],
     },
     {
@@ -62,8 +63,6 @@ const MobileNav = ({ isAuthenticated, user, mounted, handleLogout }: MobileNavPr
 
           <nav className="flex flex-col gap-1 py-4">
             <Link to="/" className="px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">🏠 {t.nav.home}</Link>
-            <Link to="/seed-guide" className="px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">🌱 {t.nav.seedGuide}</Link>
-            <Link to="/weather" className="px-4 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">🌤️ {t.nav.weather}</Link>
 
             {navGroups.map(group => (
               <details key={group.label} className="group w-full">

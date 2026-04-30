@@ -60,36 +60,37 @@ const Navbar = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 w-full z-40 transition-all duration-200",
-      isScrolled 
-        ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md py-3" 
-        : "bg-transparent py-5"
+      "fixed w-full z-40 transition-all duration-300",
+      "top-[36px]", // sits below the 36px marquee
+      isScrolled
+        ? "bg-white/95 dark:bg-gray-950/95 backdrop-blur-md shadow-md border-b border-gray-200/60 dark:border-gray-800/60 py-2"
+        : "bg-transparent py-3"
     )}>
-      <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="container mx-auto px-6 flex items-center justify-between gap-4">
+
         {/* Logo */}
         <Logo />
-        
-        {/* Desktop Navigation */}
-        <DesktopNav />
-        
-        {/* Action Buttons */}
-        <div className="hidden md:flex items-center space-x-3">
-          <LanguageSelector />
-          {mounted && <ThemeToggle />}
-          <AuthButtons 
-            isAuthenticated={isAuthenticated} 
-            user={user} 
-            handleLogout={handleLogout} 
-          />
+
+        {/* Desktop Navigation — clean pill */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <div className={cn(
+            "flex items-center rounded-full transition-all duration-300",
+            isScrolled
+              ? "bg-green-800 dark:bg-green-900 px-2 py-1 shadow-lg"
+              : "bg-green-800/90 backdrop-blur-sm border border-green-600/40 px-2 py-1 shadow-xl"
+          )}>
+            <DesktopNav isScrolled={isScrolled} />
+          </div>
         </div>
-        
+
+        {/* Action Buttons */}
+        <div className="hidden md:flex items-center gap-2">
+          <LanguageSelector />
+          <AuthButtons isAuthenticated={isAuthenticated} user={user} handleLogout={handleLogout} />
+        </div>
+
         {/* Mobile Menu */}
-        <MobileNav 
-          isAuthenticated={isAuthenticated}
-          user={user}
-          mounted={mounted}
-          handleLogout={handleLogout}
-        />
+        <MobileNav isAuthenticated={isAuthenticated} user={user} mounted={mounted} handleLogout={handleLogout} />
       </div>
     </header>
   );

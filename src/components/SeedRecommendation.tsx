@@ -23,6 +23,23 @@ const waterColor = { Low: 'text-yellow-600', Medium: 'text-blue-600', High: 'tex
 const SeedRecommendation: React.FC<{ seed: SeedInfo }> = ({ seed }) => {
   const [open, setOpen] = useState(false);
 
+  // Fallback images by seed name keyword
+  const getFallbackImage = (name: string) => {
+    const n = name.toLowerCase();
+    if (n.includes('corn') || n.includes('maize')) return 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600&q=80';
+    if (n.includes('wheat')) return 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80';
+    if (n.includes('soybean') || n.includes('soy')) return 'https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?w=600&q=80';
+    if (n.includes('rice')) return 'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=600&q=80';
+    if (n.includes('tomato')) return 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600&q=80';
+    if (n.includes('cotton')) return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80';
+    if (n.includes('sorghum')) return 'https://images.unsplash.com/photo-1536241616557-3a2e23a2fda4?w=600&q=80';
+    return 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600&q=80';
+  };
+
+  const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = getFallbackImage(seed.name);
+  };
+
   return (
     <>
       <div className="glass-card overflow-hidden transition-all duration-300 hover:shadow-lg group cursor-pointer" onClick={() => setOpen(true)}>
@@ -30,7 +47,7 @@ const SeedRecommendation: React.FC<{ seed: SeedInfo }> = ({ seed }) => {
           <div className="absolute top-2 right-2 bg-white/90 dark:bg-black/60 rounded-full px-3 py-1.5 text-xs font-semibold text-primary backdrop-blur-sm">
             {seed.matchScore}% Match
           </div>
-          <img src={seed.image} alt={seed.name} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img src={seed.image} alt={seed.name} onError={handleImgError} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
           <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-3 left-3">
             <Badge className="bg-primary hover:bg-primary">{seed.season}</Badge>
@@ -60,7 +77,7 @@ const SeedRecommendation: React.FC<{ seed: SeedInfo }> = ({ seed }) => {
           </DialogHeader>
           <div className="space-y-4">
             <div className="relative rounded-xl overflow-hidden">
-              <img src={seed.image} alt={seed.name} className="w-full h-52 object-cover" />
+              <img src={seed.image} alt={seed.name} onError={handleImgError} className="w-full h-52 object-cover" />
               <div className="absolute top-3 right-3 bg-white/90 dark:bg-black/70 rounded-full px-3 py-1 text-sm font-bold text-green-600">{seed.matchScore}% Match</div>
               <div className="absolute bottom-3 left-3"><Badge>{seed.season}</Badge></div>
             </div>

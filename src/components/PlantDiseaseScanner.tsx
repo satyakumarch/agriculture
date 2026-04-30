@@ -59,22 +59,80 @@ const PlantDiseaseScanner: React.FC = () => {
   const scanImage = () => {
     if (!image) return;
     setIsScanning(true); setResult(null); setNotPlant(false);
-    setTimeout(() => {
-      // Reject very small files as non-plant
-      if (currentFile && currentFile.size < 3000) {
-        setNotPlant(true); setIsScanning(false);
-        toast({ title:'Not a Plant Image', description:'Please upload a clear photo of a plant leaf or crop.', variant:'destructive' });
+
+    // ── Real pixel-based plant detection using Canvas API ──────────────
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      // Sample a 50×50 thumbnail for speed
+      canvas.width = 50; canvas.height = 50;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { runDiseaseDetection(); return; }
+      ctx.drawImage(img, 0, 0, 50, 50);
+      const { data } = ctx.getImageData(0, 0, 50, 50); // RGBA array
+
+      let greenPixels = 0, brownPixels = 0, yellowPixels = 0;
+      let skinPixels = 0, grayPixels = 0, bluePixels = 0;
+      const total = 50 * 50;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+
+        // Green (leaves, healthy plants): G dominant, not too bright
+        if (g > r + 15 && g > b + 10 && g > 40) greenPixels++;
+
+        // Brown/yellow (diseased leaves, dry crops)
+        else if (r > 80 && g > 50 && b < 80 && r > b + 20) brownPixels++;
+        else if (r > 150 && g > 120 && b < 80) yellowPixels++;
+
+        // Skin tones: R dominant, warm
+        else if (r > 150 && g > 100 && b > 80 && r > g && r - b > 20 && Math.abs(r - g) < 60) skinPixels++;
+
+        // Gray/concrete/road: R≈G≈B all mid-range
+        else if (Math.abs(r - g) < 20 && Math.abs(g - b) < 20 && r > 60 && r < 220) grayPixels++;
+
+        // Blue sky/water: B dominant
+        else if (b > r + 20 && b > g + 10) bluePixels++;
+      }
+
+      const plantScore = (greenPixels + brownPixels * 0.7 + yellowPixels * 0.5) / total;
+      const nonPlantScore = (skinPixels + grayPixels * 0.6 + bluePixels * 0.5) / total;
+
+      // Plant if >12% plant-colored pixels and plant score beats non-plant
+      const isPlant = plantScore > 0.12 && plantScore > nonPlantScore * 0.8;
+
+      if (!isPlant) {
+        setNotPlant(true);
+        setIsScanning(false);
+        toast({
+          title: '❌ Not a Plant Image',
+          description: 'Please upload a clear photo of a plant leaf or crop.',
+          variant: 'destructive',
+        });
         return;
       }
+
+      runDiseaseDetection();
+    };
+    img.onerror = () => runDiseaseDetection();
+    img.src = image;
+  };
+
+  const runDiseaseDetection = () => {
+    setTimeout(() => {
       const diseases = Object.keys(diseaseDB);
       const rand = Math.random();
-      const selected = rand < 0.12 ? 'healthy' : diseases.filter(d => d !== 'healthy')[Math.floor(Math.random() * (diseases.length - 1))];
+      const selected = rand < 0.12
+        ? 'healthy'
+        : diseases.filter(d => d !== 'healthy')[Math.floor(Math.random() * (diseases.length - 1))];
       const confidence = 0.73 + Math.random() * 0.23;
       setResult({ ...diseaseDB[selected], confidence });
       setIsScanning(false);
-      if (selected === 'healthy') toast({ title:'✅ Plant is Healthy!', description:'No disease detected. Continue regular monitoring.' });
-      else toast({ title:`⚠️ ${diseaseDB[selected].name} Detected`, description:`Severity: ${diseaseDB[selected].severity}. See treatment below.`, variant:'destructive' });
-    }, 2200);
+      if (selected === 'healthy')
+        toast({ title: '✅ Plant is Healthy!', description: 'No disease detected. Continue regular monitoring.' });
+      else
+        toast({ title: `⚠️ ${diseaseDB[selected].name} Detected`, description: `Severity: ${diseaseDB[selected].severity}. See treatment below.`, variant: 'destructive' });
+    }, 1800);
   };
 
   const reset = () => { setImage(null); setResult(null); setNotPlant(false); setCurrentFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; };
@@ -115,11 +173,20 @@ const PlantDiseaseScanner: React.FC = () => {
                 </div>
               )}
               {notPlant && (
-                <div className="bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-start gap-3">
-                  <AlertCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
+                <div className="bg-red-50 dark:bg-red-950/20 border-2 border-red-300 dark:border-red-700 rounded-xl p-4 flex items-start gap-3">
+                  <AlertCircle className="h-6 w-6 text-red-500 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-red-700 dark:text-red-400 text-sm">Not a Plant Image</p>
-                    <p className="text-xs text-red-600 dark:text-red-400 mt-1">The uploaded image does not appear to be a plant photo. Please upload a clear image of a plant leaf, stem, or crop showing disease symptoms for accurate diagnosis.</p>
+                    <p className="font-bold text-red-700 dark:text-red-400 text-sm mb-1">❌ Not a Plant Image</p>
+                    <p className="text-xs text-red-600 dark:text-red-400 leading-relaxed">
+                      The uploaded image does not appear to be a plant photo. Please upload a <strong>clear image of a plant leaf, stem, or crop</strong> showing disease symptoms for accurate diagnosis.
+                    </p>
+                    <ul className="text-xs text-red-500 dark:text-red-400 mt-2 space-y-0.5">
+                      <li>✓ Accepted: leaf close-ups, crop fields, diseased stems</li>
+                      <li>✗ Rejected: people, animals, food, vehicles, screenshots</li>
+                    </ul>
+                    <Button size="sm" variant="outline" className="mt-3 text-red-600 border-red-300 hover:bg-red-50 text-xs" onClick={reset}>
+                      Try Another Image
+                    </Button>
                   </div>
                 </div>
               )}

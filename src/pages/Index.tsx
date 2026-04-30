@@ -51,7 +51,7 @@ const getChatResponse = (q: string): string => {
 interface ChatMsg { role: 'user' | 'bot'; text: string; }
 
 const weatherData = { location: 'Agriville', date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }), temperature: 24, weatherType: 'sunny' as const, humidity: 45, windSpeed: 8, precipitation: 0 };
-const mockSeedData = { id: 'seed-1', name: 'Premium Hybrid Corn', image: 'https://images.unsplash.com/photo-1551817958-c5b51e7b4a33?w=800&q=80', season: 'Summer', soilType: ['Loamy', 'Sandy Loam'], waterNeeds: 'Medium' as const, growthPeriod: '90-120 days', idealTemp: '20-30°C', yieldEstimate: '8-10 tons/hectare', description: 'A high-yielding corn hybrid suitable for various soil types with excellent drought resistance and disease tolerance.', matchScore: 92 };
+const mockSeedData = { id: 'seed-1', name: 'Premium Hybrid Corn', image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600&q=80', season: 'Summer', soilType: ['Loamy', 'Sandy Loam'], waterNeeds: 'Medium' as const, growthPeriod: '90-120 days', idealTemp: '20-30°C', yieldEstimate: '8-10 tons/hectare', description: 'A high-yielding corn hybrid suitable for various soil types with excellent drought resistance and disease tolerance.', matchScore: 92 };
 const sensorData = { id: 'sensor-1', name: 'Soil Moisture', location: 'Field A, North', type: 'moisture' as const, value: 37, unit: '%', timestamp: new Date().toISOString(), batteryLevel: 84, signalStrength: 92, status: 'normal' as const };
 
 const Index = () => {
@@ -79,10 +79,10 @@ const Index = () => {
       <Navbar />
 
       {/* Agriculture News Marquee */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-green-700 text-white text-xs py-1 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-green-700 text-white overflow-hidden" style={{ height: '36px' }}>
+        <div className="flex animate-marquee whitespace-nowrap h-full items-center">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span key={i} className="mx-8 shrink-0">{item}</span>
+            <span key={i} className="mx-10 shrink-0 font-semibold tracking-wide" style={{ fontSize: '15px' }}>{item}</span>
           ))}
         </div>
       </div>
