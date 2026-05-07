@@ -17,6 +17,7 @@ interface Scheme {
   category: 'subsidy' | 'insurance' | 'loan' | 'training';
   link: string;
   crops: string[];
+  image: string;
 }
 
 const allSchemes: Scheme[] = [
@@ -29,6 +30,7 @@ const allSchemes: Scheme[] = [
     category: 'subsidy',
     link: 'https://pmkisan.gov.in',
     crops: ['Wheat', 'Rice', 'Cotton', 'Sugarcane', 'Vegetables', 'Fruits', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=400&q=80',
   },
   {
     name: 'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
@@ -39,6 +41,7 @@ const allSchemes: Scheme[] = [
     category: 'insurance',
     link: 'https://pmfby.gov.in',
     crops: ['Wheat', 'Rice', 'Cotton', 'Sugarcane', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80',
   },
   {
     name: 'Kisan Credit Card (KCC)',
@@ -49,6 +52,7 @@ const allSchemes: Scheme[] = [
     category: 'loan',
     link: 'https://www.nabard.org',
     crops: ['Wheat', 'Rice', 'Cotton', 'Sugarcane', 'Vegetables', 'Fruits', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&q=80',
   },
   {
     name: 'Soil Health Card Scheme',
@@ -59,6 +63,7 @@ const allSchemes: Scheme[] = [
     category: 'training',
     link: 'https://soilhealth.dac.gov.in',
     crops: ['Wheat', 'Rice', 'Cotton', 'Vegetables', 'Fruits', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80',
   },
   {
     name: 'National Agriculture Market (eNAM)',
@@ -69,6 +74,7 @@ const allSchemes: Scheme[] = [
     category: 'subsidy',
     link: 'https://enam.gov.in',
     crops: ['Wheat', 'Rice', 'Cotton', 'Vegetables', 'Fruits', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80',
   },
   {
     name: 'PM Krishi Sinchai Yojana',
@@ -79,6 +85,7 @@ const allSchemes: Scheme[] = [
     category: 'subsidy',
     link: 'https://pmksy.gov.in',
     crops: ['Vegetables', 'Fruits', 'Sugarcane', 'Cotton'],
+    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&q=80',
   },
   {
     name: 'Rashtriya Krishi Vikas Yojana (RKVY)',
@@ -89,6 +96,7 @@ const allSchemes: Scheme[] = [
     category: 'loan',
     link: 'https://rkvy.nic.in',
     crops: ['Wheat', 'Rice', 'Cotton', 'Sugarcane', 'Vegetables', 'Fruits', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=400&q=80',
   },
   {
     name: 'Paramparagat Krishi Vikas Yojana (PKVY)',
@@ -97,8 +105,9 @@ const allSchemes: Scheme[] = [
     amount: '₹50,000/hectare over 3 years',
     eligibility: ['Farmers willing to adopt organic farming', 'Group of 50+ farmers'],
     category: 'training',
-    link: 'https://pgsindia-ncof.gov.in',
+    link: 'https://agricoop.nic.in/en/pkvy',
     crops: ['Vegetables', 'Fruits', 'Pulses', 'Oilseeds'],
+    image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&q=80',
   },
 ];
 

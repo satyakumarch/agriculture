@@ -1,4 +1,4 @@
-
+﻿
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/Footer';
@@ -26,59 +26,170 @@ interface SeedInfo {
   matchScore: number;
 }
 
-// Sample seed data
+// Sample seed data â€” 3 per season (Spring, Summer, Fall, Winter)
 const initialSeeds: SeedInfo[] = [
+  // â”€â”€ SPRING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
-    id: 'seed-1',
+    id: 'spring-1',
+    name: 'Cherry Tomato (Spring Star)',
+    image: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600&q=80',
+    season: 'Spring',
+    soilType: ['Loamy', 'Sandy Loam'],
+    waterNeeds: 'Medium',
+    growthPeriod: '60-80 days',
+    idealTemp: '18-28Â°C',
+    yieldEstimate: '20-25 tons/hectare',
+    description: 'Sweet cherry tomato variety ideal for spring planting. Produces clusters of small, flavorful fruits with high disease resistance.',
+    matchScore: 91,
+  },
+  {
+    id: 'spring-2',
+    name: 'Green Pea (Arkel)',
+    image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80',
+    season: 'Spring',
+    soilType: ['Loamy', 'Clay Loam'],
+    waterNeeds: 'Medium',
+    growthPeriod: '55-70 days',
+    idealTemp: '13-22Â°C',
+    yieldEstimate: '8-12 tons/hectare',
+    description: 'Early-maturing pea variety with tender, sweet pods. Excellent for fresh consumption and processing. Thrives in cool spring weather.',
+    matchScore: 88,
+  },
+  {
+    id: 'spring-3',
+    name: 'Sunflower (Hybrid 6480)',
+    image: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=600&q=80',
+    season: 'Spring',
+    soilType: ['Sandy Loam', 'Loamy'],
+    waterNeeds: 'Low',
+    growthPeriod: '90-100 days',
+    idealTemp: '20-30Â°C',
+    yieldEstimate: '1.5-2.5 tons/hectare (seeds)',
+    description: 'High-oil content sunflower hybrid perfect for spring sowing. Excellent drought tolerance and strong stem for lodging resistance.',
+    matchScore: 86,
+  },
+
+  // â”€â”€ SUMMER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  {
+    id: 'summer-1',
     name: 'Premium Hybrid Corn',
-    image: 'https://images.unsplash.com/photo-1551817958-c5b51e7b4a33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+    image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=80',
     season: 'Summer',
     soilType: ['Loamy', 'Sandy Loam'],
     waterNeeds: 'Medium',
     growthPeriod: '90-120 days',
-    idealTemp: '20-30°C',
+    idealTemp: '20-30Â°C',
     yieldEstimate: '8-10 tons/hectare',
     description: 'A high-yielding corn hybrid suitable for various soil types with excellent drought resistance and disease tolerance.',
     matchScore: 92,
   },
   {
-    id: 'seed-2',
-    name: 'Organic Wheat Variety',
-    image: 'https://images.unsplash.com/photo-1481713160429-bd6f6e47add4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    season: 'Winter',
-    soilType: ['Clay Loam', 'Silt Loam'],
-    waterNeeds: 'Low',
-    growthPeriod: '180-240 days',
-    idealTemp: '15-25°C',
-    yieldEstimate: '3-5 tons/hectare',
-    description: 'An organic winter wheat variety with excellent cold tolerance and exceptional baking quality.',
-    matchScore: 87,
-  },
-  {
-    id: 'seed-3',
-    name: 'High-Yield Soybean',
-    image: 'https://images.unsplash.com/photo-1595412017587-b3e9911ae0bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80',
+    id: 'summer-2',
+    name: 'High-Yield Soybean (JS 335)',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Soybeanvarieties.jpg/640px-Soybeanvarieties.jpg',
     season: 'Summer',
     soilType: ['Loamy', 'Clay'],
     waterNeeds: 'Medium',
-    growthPeriod: '100-140 days',
-    idealTemp: '18-30°C',
+    growthPeriod: '95-100 days',
+    idealTemp: '18-30Â°C',
     yieldEstimate: '2-4 tons/hectare',
-    description: 'A high protein soybean variety with resistance to common diseases and adaptability to various growing conditions.',
+    description: 'High protein soybean variety with resistance to common diseases. Excellent nitrogen fixation improves soil health for next crop.',
     matchScore: 85,
   },
   {
-    id: 'seed-4',
+    id: 'summer-3',
     name: 'Drought-Resistant Sorghum',
-    image: 'https://images.unsplash.com/photo-1536241616557-3a2e23a2fda4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+    image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600&q=80',
     season: 'Summer',
     soilType: ['Sandy', 'Loamy'],
     waterNeeds: 'Low',
     growthPeriod: '90-120 days',
-    idealTemp: '20-35°C',
+    idealTemp: '20-35Â°C',
     yieldEstimate: '3-6 tons/hectare',
-    description: 'A drought-tolerant sorghum variety perfect for arid and semi-arid regions with minimal water requirements.',
+    description: 'Drought-tolerant sorghum perfect for arid and semi-arid regions. Minimal water requirements with high heat tolerance.',
     matchScore: 90,
+  },
+
+  // â”€â”€ FALL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  {
+    id: 'fall-1',
+    name: 'Mustard (Pusa Bold)',
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80',
+    season: 'Autumn',
+    soilType: ['Loamy', 'Sandy Loam'],
+    waterNeeds: 'Low',
+    growthPeriod: '110-120 days',
+    idealTemp: '10-25Â°C',
+    yieldEstimate: '1.5-2.5 tons/hectare',
+    description: 'High-yielding mustard variety with bold seeds and high oil content. Ideal for Rabi season with good tolerance to frost.',
+    matchScore: 89,
+  },
+  {
+    id: 'fall-2',
+    name: 'Chickpea (Desi Kabuli)',
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80',
+    season: 'Autumn',
+    soilType: ['Sandy Loam', 'Clay Loam'],
+    waterNeeds: 'Low',
+    growthPeriod: '90-110 days',
+    idealTemp: '15-25Â°C',
+    yieldEstimate: '1.5-2.5 tons/hectare',
+    description: 'Protein-rich chickpea variety suited for fall planting. Excellent drought tolerance and nitrogen-fixing ability improves soil fertility.',
+    matchScore: 84,
+  },
+  {
+    id: 'fall-3',
+    name: 'Potato (Kufri Jyoti)',
+    image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&q=80',
+    season: 'Autumn',
+    soilType: ['Sandy Loam', 'Loamy'],
+    waterNeeds: 'Medium',
+    growthPeriod: '90-110 days',
+    idealTemp: '15-25Â°C',
+    yieldEstimate: '15-20 tons/hectare',
+    description: 'Popular table potato variety with smooth skin and high starch content. Excellent for both fresh market and processing.',
+    matchScore: 87,
+  },
+
+  // â”€â”€ WINTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  {
+    id: 'winter-1',
+    name: 'Organic Wheat (HD-2967)',
+    image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80',
+    season: 'Winter',
+    soilType: ['Clay Loam', 'Silt Loam'],
+    waterNeeds: 'Low',
+    growthPeriod: '120-130 days',
+    idealTemp: '15-25Â°C',
+    yieldEstimate: '4-6 tons/hectare',
+    description: 'High-yielding certified wheat variety resistant to rust and lodging. Excellent cold tolerance and exceptional baking quality.',
+    matchScore: 87,
+  },
+  {
+    id: 'winter-2',
+    name: 'Spinach (Green Glory)',
+    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&q=80',
+    season: 'Winter',
+    soilType: ['Sandy Loam', 'Loamy'],
+    waterNeeds: 'Medium',
+    growthPeriod: '35-45 days',
+    idealTemp: '5-20Â°C',
+    yieldEstimate: '10-15 tons/hectare',
+    description: 'Fast-growing leafy vegetable rich in iron and vitamins. Thrives in cool winter temperatures with continuous harvest possible.',
+    matchScore: 83,
+  },
+  {
+    id: 'winter-3',
+    name: 'Onion (Nasik Red)',
+    image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=600&q=80',
+    season: 'Winter',
+    soilType: ['Sandy Loam', 'Loamy'],
+    waterNeeds: 'Medium',
+    growthPeriod: '120-130 days',
+    idealTemp: '13-24Â°C',
+    yieldEstimate: '20-30 tons/hectare',
+    description: 'Deep red bulb onion with pungent flavour and excellent shelf life. High demand in domestic and export markets.',
+    matchScore: 86,
   },
 ];
 
@@ -95,14 +206,9 @@ const SeedGuide = () => {
     const authStatus = localStorage.getItem('isAuthenticated') === 'true';
     setIsAuthenticated(authStatus);
     
-    // Load seeds from localStorage or use initial data
-    const savedSeeds = localStorage.getItem('seeds');
-    if (savedSeeds) {
-      setSeeds(JSON.parse(savedSeeds));
-    } else {
-      setSeeds(initialSeeds);
-      localStorage.setItem('seeds', JSON.stringify(initialSeeds));
-    }
+    // Always use fresh initialSeeds (clears old cached data)
+    localStorage.setItem('seeds', JSON.stringify(initialSeeds));
+    setSeeds(initialSeeds);
   }, []);
 
   const handleRemoveSeed = (seedId: string) => {
@@ -253,7 +359,7 @@ const SeedGuide = () => {
                     <div className="space-y-4">
                       <div>
                         <h4 className="font-medium mb-2">Planting Depth</h4>
-                        <p className="text-sm">A general rule is to plant seeds at a depth that is 2-3 times their diameter. Larger seeds like corn should be planted deeper (1-2 inches) than smaller seeds like lettuce (¼ inch).</p>
+                        <p className="text-sm">A general rule is to plant seeds at a depth that is 2-3 times their diameter. Larger seeds like corn should be planted deeper (1-2 inches) than smaller seeds like lettuce (Â¼ inch).</p>
                       </div>
                       
                       <div>
@@ -278,7 +384,7 @@ const SeedGuide = () => {
               <TabsContent value="catalog">
                 <div className="space-y-8">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold mb-2">🌱 Full Catalog – Seed Guide</h3>
+                    <h3 className="text-2xl font-bold mb-2">ðŸŒ± Full Catalog â€“ Seed Guide</h3>
                     <p className="text-muted-foreground">Complete collection of seeds for all your farming needs</p>
                   </div>
 
@@ -297,9 +403,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Tomato (Hybrid Red King)</h5>
                           <p className="text-sm text-muted-foreground mb-3">High-yield hybrid variety with firm, bright red fruits.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 70–80 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 70â€“80 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Well-drained loamy soil, warm climate</div>
-                            <div><span className="font-medium">Yield Potential:</span> 25–30 tons/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 25â€“30 tons/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Requires staking; regular watering needed</div>
                           </div>
                         </div>
@@ -315,9 +421,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Spinach (Green Glory)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Fast-growing leafy vegetable, rich in iron.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 35–40 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 35â€“40 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Prefers cool climate, moist sandy-loam soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 10–12 tons/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 10â€“12 tons/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Continuous harvesting possible by cutting outer leaves</div>
                           </div>
                         </div>
@@ -333,9 +439,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Potato (Kufri Jyoti)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Popular table variety with smooth skin and high starch content.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 90–110 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 90â€“110 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Cool climate, well-drained loamy soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 15–20 tons/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 15â€“20 tons/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Earthing up required; avoid waterlogging</div>
                           </div>
                         </div>
@@ -343,7 +449,7 @@ const SeedGuide = () => {
 
                       <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
                         <img
-                          src="https://images.unsplash.com/photo-1566842600175-97dca489844f?w=600&q=80"
+                          src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=600&q=80"
                           alt="Onion"
                           className="w-full h-44 object-cover"
                         />
@@ -351,9 +457,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Onion (Nasik Red)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Deep red bulbs with pungent flavour, excellent shelf life.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 120–130 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 120â€“130 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Dry climate, well-drained sandy loam</div>
-                            <div><span className="font-medium">Yield Potential:</span> 12–18 tons/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 12â€“18 tons/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Reduce irrigation 2 weeks before harvest</div>
                           </div>
                         </div>
@@ -377,9 +483,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Watermelon (Sugar Star)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Sweet, large-sized fruits with bright red flesh.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 90–100 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 90â€“100 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Hot climate, sandy-loam soil with good drainage</div>
-                            <div><span className="font-medium">Yield Potential:</span> 30–35 tons/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 30â€“35 tons/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Requires full sun; avoid waterlogging</div>
                           </div>
                         </div>
@@ -395,9 +501,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Papaya (Golden Sunrise)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Medium-height variety with yellow-orange pulp, good for table use.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 9–11 months for fruiting</div>
+                            <div><span className="font-medium">Growth Duration:</span> 9â€“11 months for fruiting</div>
                             <div><span className="font-medium">Climate/Soil:</span> Tropical climate, well-drained sandy loam soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 40–60 kg per plant annually</div>
+                            <div><span className="font-medium">Yield Potential:</span> 40â€“60 kg per plant annually</div>
                             <div><span className="font-medium">Care Tips:</span> Protect from frost; irrigation at regular intervals</div>
                           </div>
                         </div>
@@ -405,17 +511,17 @@ const SeedGuide = () => {
 
                       <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
                         <img
-                          src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&q=80"
+                          src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=600&q=80"
                           alt="Mango Alphonso"
                           className="w-full h-44 object-cover"
                         />
                         <div className="p-4">
                           <h5 className="font-medium text-lg mb-1">Mango (Alphonso)</h5>
-                          <p className="text-sm text-muted-foreground mb-3">King of mangoes — rich aroma, sweet pulp, premium export quality.</p>
+                          <p className="text-sm text-muted-foreground mb-3">King of mangoes â€” rich aroma, sweet pulp, premium export quality.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 3–5 years (first fruit)</div>
+                            <div><span className="font-medium">Growth Duration:</span> 3â€“5 years (first fruit)</div>
                             <div><span className="font-medium">Climate/Soil:</span> Tropical, deep well-drained alluvial soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 100–200 fruits/tree/year</div>
+                            <div><span className="font-medium">Yield Potential:</span> 100â€“200 fruits/tree/year</div>
                             <div><span className="font-medium">Care Tips:</span> Prune after harvest; apply potash before flowering</div>
                           </div>
                         </div>
@@ -431,9 +537,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Banana (Grand Naine)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Dwarf Cavendish type, high bunch weight, disease resistant.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 11–13 months</div>
+                            <div><span className="font-medium">Growth Duration:</span> 11â€“13 months</div>
                             <div><span className="font-medium">Climate/Soil:</span> Humid tropical, rich loamy soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 25–35 tons/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 25â€“35 tons/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Remove suckers; prop bunches to prevent lodging</div>
                           </div>
                         </div>
@@ -457,9 +563,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Marigold (Orange Delight)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Popular ornamental flower with bright orange blooms.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 60–70 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 60â€“70 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Grows well in sandy-loam soil; moderate climate</div>
-                            <div><span className="font-medium">Yield Potential:</span> 12–15 tons of flowers/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 12â€“15 tons of flowers/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Pinching improves branching and flower size</div>
                           </div>
                         </div>
@@ -475,9 +581,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Sunflower (Golden Shine)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Large, bright yellow flowers, also grown for seeds.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 90–100 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 90â€“100 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Warm climate, fertile loam soil with good drainage</div>
-                            <div><span className="font-medium">Yield Potential:</span> 8–10 quintals seeds/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 8â€“10 quintals seeds/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Ensure spacing for large flower heads</div>
                           </div>
                         </div>
@@ -485,7 +591,7 @@ const SeedGuide = () => {
 
                       <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
                         <img
-                          src="https://images.unsplash.com/photo-1490750967868-88df5691cc5e?w=600&q=80"
+                          src="https://images.unsplash.com/photo-1548460268-a2a8f0e84b3e?w=600&q=80"
                           alt="Rose"
                           className="w-full h-44 object-cover"
                         />
@@ -493,9 +599,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Rose (Hybrid Tea)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Classic cut flower with large blooms and long stems.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 45–60 days (first flush)</div>
+                            <div><span className="font-medium">Growth Duration:</span> 45â€“60 days (first flush)</div>
                             <div><span className="font-medium">Climate/Soil:</span> Mild climate, well-drained fertile loam</div>
-                            <div><span className="font-medium">Yield Potential:</span> 80,000–1,00,000 stems/acre/year</div>
+                            <div><span className="font-medium">Yield Potential:</span> 80,000â€“1,00,000 stems/acre/year</div>
                             <div><span className="font-medium">Care Tips:</span> Prune after each flush; spray for black spot</div>
                           </div>
                         </div>
@@ -503,7 +609,7 @@ const SeedGuide = () => {
 
                       <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
                         <img
-                          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                          src="https://images.unsplash.com/photo-1611735341450-74d61e660ad2?w=600&q=80"
                           alt="Jasmine"
                           className="w-full h-44 object-cover object-top"
                         />
@@ -511,9 +617,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Jasmine (Mogra)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Fragrant white flowers, high demand for garlands and perfume.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 6–8 months (first bloom)</div>
+                            <div><span className="font-medium">Growth Duration:</span> 6â€“8 months (first bloom)</div>
                             <div><span className="font-medium">Climate/Soil:</span> Warm humid climate, well-drained loamy soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 3–5 tons/acre/year</div>
+                            <div><span className="font-medium">Yield Potential:</span> 3â€“5 tons/acre/year</div>
                             <div><span className="font-medium">Care Tips:</span> Prune after flowering season; apply organic manure</div>
                           </div>
                         </div>
@@ -537,9 +643,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Wheat (HD-2967)</h5>
                           <p className="text-sm text-muted-foreground mb-3">High-yielding certified wheat, resistant to rust and lodging.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 120–130 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 120â€“130 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Cool dry climate, loamy soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 18–22 quintals/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 18â€“22 quintals/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Irrigate at crown root initiation stage</div>
                           </div>
                         </div>
@@ -555,10 +661,10 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Rice (Pusa Basmati 1121)</h5>
                           <p className="text-sm text-muted-foreground mb-3">Premium long-grain basmati with excellent aroma and export demand.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 140–145 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 140â€“145 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Humid, clay or clay-loam soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 15–18 quintals/acre</div>
-                            <div><span className="font-medium">Care Tips:</span> Maintain 2–5 cm standing water; weed at 20 days</div>
+                            <div><span className="font-medium">Yield Potential:</span> 15â€“18 quintals/acre</div>
+                            <div><span className="font-medium">Care Tips:</span> Maintain 2â€“5 cm standing water; weed at 20 days</div>
                           </div>
                         </div>
                       </div>
@@ -573,9 +679,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Corn / Maize (DKC 9144)</h5>
                           <p className="text-sm text-muted-foreground mb-3">High-yield hybrid maize with strong stalk and disease tolerance.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 95–105 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 95â€“105 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Warm climate, well-drained fertile loam</div>
-                            <div><span className="font-medium">Yield Potential:</span> 25–30 quintals/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 25â€“30 quintals/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Top-dress urea at knee-height stage</div>
                           </div>
                         </div>
@@ -583,7 +689,7 @@ const SeedGuide = () => {
 
                       <div className="border rounded-xl overflow-hidden bg-background/50 hover:shadow-md transition-shadow">
                         <img
-                          src="https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?w=600&q=80"
+                          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Soybeanvarieties.jpg/640px-Soybeanvarieties.jpg"
                           alt="Soybean"
                           className="w-full h-44 object-cover"
                         />
@@ -591,9 +697,9 @@ const SeedGuide = () => {
                           <h5 className="font-medium text-lg mb-1">Soybean (JS 335)</h5>
                           <p className="text-sm text-muted-foreground mb-3">High protein content, suitable for oil extraction and animal feed.</p>
                           <div className="space-y-1 text-sm">
-                            <div><span className="font-medium">Growth Duration:</span> 95–100 days</div>
+                            <div><span className="font-medium">Growth Duration:</span> 95â€“100 days</div>
                             <div><span className="font-medium">Climate/Soil:</span> Warm humid, well-drained black cotton soil</div>
-                            <div><span className="font-medium">Yield Potential:</span> 10–14 quintals/acre</div>
+                            <div><span className="font-medium">Yield Potential:</span> 10â€“14 quintals/acre</div>
                             <div><span className="font-medium">Care Tips:</span> Seed treatment with Rhizobium culture improves yield</div>
                           </div>
                         </div>
@@ -615,3 +721,4 @@ const SeedGuide = () => {
 };
 
 export default SeedGuide;
+

@@ -26,9 +26,9 @@ const SeedRecommendation: React.FC<{ seed: SeedInfo }> = ({ seed }) => {
   // Fallback images by seed name keyword
   const getFallbackImage = (name: string) => {
     const n = name.toLowerCase();
-    if (n.includes('corn') || n.includes('maize')) return 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600&q=80';
+    if (n.includes('corn') || n.includes('maize')) return 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=80';
     if (n.includes('wheat')) return 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80';
-    if (n.includes('soybean') || n.includes('soy')) return 'https://images.unsplash.com/photo-1601648764658-cf37e8c89b70?w=600&q=80';
+    if (n.includes('soybean') || n.includes('soy')) return 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Soybeanvarieties.jpg/640px-Soybeanvarieties.jpg';
     if (n.includes('rice')) return 'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=600&q=80';
     if (n.includes('tomato')) return 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600&q=80';
     if (n.includes('cotton')) return 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80';

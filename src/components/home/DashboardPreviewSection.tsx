@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import WeatherWidget from '@/components/WeatherWidget';
 import ExpenseChart from '@/components/ExpenseChart';
 import SeedRecommendation from '@/components/SeedRecommendation';
@@ -44,6 +45,7 @@ interface DashboardPreviewSectionProps {
 }
 
 const DashboardPreviewSection = ({ weatherData, sensorData, seedData }: DashboardPreviewSectionProps) => {
+  const navigate = useNavigate();
   return (
     <section className="py-24 bg-green-50 dark:bg-green-950/10 relative overflow-hidden">
       {/* Background removed */}
@@ -73,7 +75,7 @@ const DashboardPreviewSection = ({ weatherData, sensorData, seedData }: Dashboar
             <div className="glass-card p-6">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-semibold">Recommended Seeds for This Season</h3>
-                <Button variant="outline" size="sm">View All</Button>
+                <Button variant="outline" size="sm" onClick={() => navigate('/seed-guide')}>View All</Button>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
