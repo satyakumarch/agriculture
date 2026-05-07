@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageSquare, Send, Bot, Users, ThumbsUp, Flag, Sprout } from 'lucide-react';
+import { apiPostMessage, apiGetMessages, apiLikeMessage } from '@/lib/api';
 
 interface ChatMessage {
   id: string;
@@ -59,6 +60,19 @@ const FarmerCommunity = () => {
   const [userName] = useState('You');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Load messages from MongoDB on mount
+  useEffect(() => {
+    apiGetMessages().then(data => {
+      if (Array.isArray(data) && data.length > 0) {
+        const dbMsgs: ChatMessage[] = data.map((m: any) => ({
+          id: m._id, author: m.userName, avatar: m.userName.slice(0,2).toUpperCase(),
+          text: m.text, timestamp: new Date(m.createdAt), likes: m.likes || 0, topic: m.topic,
+        }));
+        setMessages([...initialMessages, ...dbMsgs]);
+      }
+    }).catch(() => {});
+  }, []);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -66,28 +80,22 @@ const FarmerCommunity = () => {
   const handleSend = () => {
     if (!input.trim()) return;
     const userMsg: ChatMessage = {
-      id: Date.now().toString(),
-      author: userName,
-      avatar: 'YO',
-      text: input,
-      timestamp: new Date(),
-      likes: 0,
+      id: Date.now().toString(), author: userName, avatar: 'YO',
+      text: input, timestamp: new Date(), likes: 0,
     };
     setMessages(prev => [...prev, userMsg]);
     const userInput = input;
     setInput('');
 
+    // Save to MongoDB
+    apiPostMessage({ userName, text: userInput, topic: activeTopic !== 'All' ? activeTopic.toLowerCase() : 'general' }).catch(() => {});
+
     // AI auto-response after 1.2s
     setTimeout(() => {
       const aiText = getAIResponse(userInput);
       const aiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        author: 'AI Moderator',
-        avatar: '🤖',
-        text: aiText,
-        timestamp: new Date(),
-        isAI: true,
-        likes: 0,
+        id: (Date.now() + 1).toString(), author: 'AI Moderator', avatar: '🤖',
+        text: aiText, timestamp: new Date(), isAI: true, likes: 0,
       };
       setMessages(prev => [...prev, aiMsg]);
     }, 1200);
@@ -95,6 +103,7 @@ const FarmerCommunity = () => {
 
   const handleLike = (id: string) => {
     setMessages(prev => prev.map(m => m.id === id ? { ...m, likes: m.likes + 1 } : m));
+    apiLikeMessage(id).catch(() => {});
   };
 
   const filteredMessages = activeTopic === 'All' ? messages : messages.filter(m => m.topic?.toLowerCase() === activeTopic.toLowerCase() || m.isAI);

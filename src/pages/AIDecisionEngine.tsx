@@ -12,6 +12,7 @@ import {
   IndianRupee, Leaf, FlaskConical, Tractor,
   ShieldCheck, ChevronDown, ChevronUp
 } from 'lucide-react';
+import { apiSaveFarmAnalysis } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 
 const crops = ['Wheat','Rice','Corn','Cotton','Sugarcane','Tomato','Potato','Soybean','Mustard','Groundnut','Onion','Chickpea'];
@@ -162,6 +163,13 @@ const AIDecisionEngine = () => {
     setOpenSection('overview');
     toast({ title: '✅ Farm Report Ready', description: `Full analysis generated for ${crop}.` });
     setTimeout(() => document.getElementById('report-top')?.scrollIntoView({ behavior: 'smooth' }), 150);
+
+    // Save to MongoDB (non-blocking — works even if backend is offline)
+    apiSaveFarmAnalysis({
+      cropType: crop, soilType: soil, cropStage: stage, season,
+      irrigationSource: irrigation, stateRegion: location,
+      farmArea: parseFloat(area) || 1, temperature, soilMoisture: moisture,
+    }).catch(() => {}); // silently ignore if backend offline
   };
 
   const toggle = (s: string) => setOpenSection(prev => prev === s ? null : s);

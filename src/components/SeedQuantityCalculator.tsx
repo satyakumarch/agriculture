@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calculator, Leaf, Calendar } from 'lucide-react';
+import { apiSaveSeedCalc } from '@/lib/api';
 
 // Conversion to square meters
 const unitToSqM: Record<string, number> = {
@@ -64,8 +65,11 @@ const SeedQuantityCalculator: React.FC<{ className?: string }> = ({ className })
     const hectares = sqMeters / 10000;
     const seed = seedRates[seedType];
     const kg = seed.kgPerHa * hectares;
-    const cost = kg * 85; // avg ₹85/kg
+    const cost = kg * 85;
     setResult({ kg, cost, details: seed });
+
+    // Save to MongoDB
+    apiSaveSeedCalc({ seedType, area: numArea, areaUnit: unit, seedQtyKg: kg, estCost: cost }).catch(() => {});
   };
 
   return (

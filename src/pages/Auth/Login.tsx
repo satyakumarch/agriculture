@@ -22,14 +22,37 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
+      // Try MongoDB backend first
+      const res = await fetch("http://localhost:4000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.token) {
+        // MongoDB login success
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify({ email: data.user.email, role: data.user.role || "client", name: data.user.name }));
+        toast({ title: "✅ Welcome back!", description: `Logged in as ${data.user.email}` });
+        navigate(from, { replace: true });
+      } else {
+        // Fallback: local auth
+        const success = await login(email, password);
+        if (success) {
+          localStorage.setItem("user", JSON.stringify({ email, role: "client" }));
+          toast({ title: "Welcome back!", description: `Logged in as ${email}` });
+          navigate(from, { replace: true });
+        }
+      }
+    } catch {
+      // Backend offline — use local auth
       const success = await login(email, password);
       if (success) {
         localStorage.setItem("user", JSON.stringify({ email, role: "client" }));
-        toast({ title: "Welcome back!", description: `Logged in as ${email}` });
         navigate(from, { replace: true });
       }
-    } catch (err) {
-      console.error(err);
     } finally {
       setIsLoading(false);
     }

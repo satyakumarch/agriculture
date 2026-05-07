@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, TrendingDown, AlertTriangle, IndianRupee, Sprout, BarChart3 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { apiSaveProfitPrediction } from '@/lib/api';
 
 const cropData: Record<string, { yieldPerAcre: number; marketPrice: number; riskFactor: number }> = {
   Wheat: { yieldPerAcre: 18, marketPrice: 2200, riskFactor: 0.15 },
@@ -59,6 +60,13 @@ const ProfitPrediction = () => {
     const breakEven = totalExpenses / data.marketPrice;
 
     setResult({ expectedYield, grossRevenue, netProfit, roi, riskPercent, breakEven, monthlyExpense: totalExpenses / 4 });
+
+    // Save to MongoDB
+    apiSaveProfitPrediction({
+      cropType: crop, farmArea: areaInAcres, areaUnit: unit,
+      inputCost: totalExpenses, expectedYield, marketPrice: data.marketPrice,
+      grossRevenue, netProfit, roi: roi.toFixed(1) + '%',
+    }).catch(() => {});
   };
 
   const chartData = result ? [

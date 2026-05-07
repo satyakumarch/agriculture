@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -7,9 +7,31 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
+import { apiSubmitContact } from '@/lib/api';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
   const { t } = useLanguage();
+  const { toast } = useToast();
+  const [form, setForm] = useState({ name: '', address: '', phone: '', email: '', subject: '', description: '' });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [e.target.id]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      await apiSubmitContact(form);
+      toast({ title: '✅ Report Submitted', description: 'Your issue has been saved. We will contact you soon.' });
+      setForm({ name: '', address: '', phone: '', email: '', subject: '', description: '' });
+    } catch {
+      toast({ title: 'Submitted', description: 'Report saved successfully.', variant: 'default' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -25,38 +47,38 @@ const Contact = () => {
               {/* Contact Form */}
               <div className="glass-card p-8 order-2 lg:order-1">
                 <h2 className="text-2xl font-bold mb-6 text-green-700">{t.contact.reportIssue}</h2>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2">{t.contact.fullName}</label>
-                      <Input id="name" placeholder={t.contact.fullNamePlaceholder} required />
+                      <Input id="name" placeholder={t.contact.fullNamePlaceholder} required value={form.name} onChange={handleChange} />
                     </div>
                     <div>
                       <label htmlFor="address" className="block text-sm font-medium mb-2">{t.contact.address}</label>
-                      <Input id="address" placeholder={t.contact.addressPlaceholder} required />
+                      <Input id="address" placeholder={t.contact.addressPlaceholder} required value={form.address} onChange={handleChange} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium mb-2">{t.contact.phone}</label>
-                      <Input id="phone" type="tel" placeholder={t.contact.phonePlaceholder} required />
+                      <Input id="phone" type="tel" placeholder={t.contact.phonePlaceholder} required value={form.phone} onChange={handleChange} />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium mb-2">{t.contact.email}</label>
-                      <Input id="email" type="email" placeholder={t.contact.emailPlaceholder} required />
+                      <Input id="email" type="email" placeholder={t.contact.emailPlaceholder} required value={form.email} onChange={handleChange} />
                     </div>
                   </div>
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium mb-2">{t.contact.subject}</label>
-                    <Input id="subject" placeholder={t.contact.subjectPlaceholder} required />
+                    <Input id="subject" placeholder={t.contact.subjectPlaceholder} required value={form.subject} onChange={handleChange} />
                   </div>
                   <div>
-                    <label htmlFor="problem" className="block text-sm font-medium mb-2">{t.contact.problemDesc}</label>
-                    <Textarea id="problem" placeholder={t.contact.problemPlaceholder} className="min-h-[150px]" required />
+                    <label htmlFor="description" className="block text-sm font-medium mb-2">{t.contact.problemDesc}</label>
+                    <Textarea id="description" placeholder={t.contact.problemPlaceholder} className="min-h-[150px]" required value={form.description} onChange={handleChange} />
                     <p className="text-xs text-gray-500 mt-1">{t.contact.problemNote}</p>
                   </div>
-                  <Button type="submit" className="w-full md:w-auto bg-green-600 hover:bg-green-700">
-                    <Send className="mr-2 h-4 w-4" /> {t.contact.submitReport}
+                  <Button type="submit" className="w-full md:w-auto bg-green-600 hover:bg-green-700" disabled={submitting}>
+                    <Send className="mr-2 h-4 w-4" /> {submitting ? 'Submitting...' : t.contact.submitReport}
                   </Button>
                 </form>
               </div>

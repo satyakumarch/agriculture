@@ -21,25 +21,41 @@ const Register = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (password !== confirmPassword) {
-      toast({
-        title: "Passwords don't match",
-        description: "Please ensure that the passwords match.",
-        variant: "destructive",
-      });
+      toast({ title: "Passwords don't match", description: "Please ensure that the passwords match.", variant: "destructive" });
       return;
     }
-    
     setIsLoading(true);
-    
     try {
-      const success = await register(name, email, password);
-      if (success) {
+      // Save to MongoDB backend
+      const res = await fetch('http://localhost:4000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.token) {
+        // MongoDB register success
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify({ email: data.user.email, role: 'client', name }));
+        toast({ title: '✅ Account Created!', description: `Welcome to AgriAssist, ${name}!` });
         navigate('/');
+      } else {
+        // Fallback: local register
+        const success = await register(name, email, password);
+        if (success) {
+          toast({ title: '✅ Account Created!', description: `Welcome, ${name}!` });
+          navigate('/');
+        } else {
+          toast({ title: 'Registration failed', description: data.message || 'Please try again.', variant: 'destructive' });
+        }
       }
-    } catch (error) {
-      console.error('Registration error:', error);
+    } catch {
+      // Backend offline — use local register
+      const success = await register(name, email, password);
+      if (success) navigate('/');
     } finally {
       setIsLoading(false);
     }
