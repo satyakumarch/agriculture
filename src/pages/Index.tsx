@@ -78,21 +78,6 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Agriculture News Marquee */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-green-700 text-white overflow-hidden" style={{ height: '36px' }}>
-        <div className="flex animate-marquee whitespace-nowrap h-full items-center">
-          {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span key={i} className="mx-10 shrink-0 font-semibold tracking-wide" style={{ fontSize: '15px' }}>{item}</span>
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-marquee { animation: marquee 40s linear infinite; }
-        .animate-marquee:hover { animation-play-state: paused; }
-      `}</style>
-
       <div className="pt-6">
         <Hero />
         <FeaturesSection />
