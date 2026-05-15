@@ -11,7 +11,7 @@ const featureIcons = [
   <Satellite className="h-5 w-5 text-primary" />,
   <MessagesSquare className="h-5 w-5 text-primary" />,
 ];
-const featureLinks = ['/expense-tracker', '/weather', '/disease-scanner', '/drone', '/community'];
+const featureLinks = ['/expense-tracker', '/weather', '/disease-scanner', '/community', '/community'];
 
 const AdditionalFeaturesSection = () => {
   const [expanded, setExpanded] = useState<number | null>(null);

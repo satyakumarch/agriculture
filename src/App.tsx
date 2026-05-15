@@ -21,7 +21,6 @@ import Marketplace from '@/pages/Marketplace';
 import FarmDigitalTwin from '@/pages/FarmDigitalTwin';
 import LearningHub from '@/pages/LearningHub';
 import EmergencySOS from '@/pages/EmergencySOS';
-import DroneIntelligence from '@/pages/DroneIntelligence';
 
 // ── Protected Route ────────────────────────────────────────────────────────
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -61,7 +60,6 @@ const App = () => {
           <Route path="/farm-digital-twin"  element={<ProtectedRoute><FarmDigitalTwin /></ProtectedRoute>} />
           <Route path="/learning-hub"       element={<ProtectedRoute><LearningHub /></ProtectedRoute>} />
           <Route path="/emergency-sos"      element={<ProtectedRoute><EmergencySOS /></ProtectedRoute>} />
-          <Route path="/drone"              element={<ProtectedRoute><DroneIntelligence /></ProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

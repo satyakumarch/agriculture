@@ -93,7 +93,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-medium text-lg">{t.contact.ourLocation}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
-                        Lovely Professional University<br />
+                      <br />
                         Jalandhar - Delhi, Grand Trunk Road (NH-44)<br />
                         Phagwara, Punjab – 144411<br />
                         India
@@ -108,8 +108,8 @@ const Contact = () => {
                       <h3 className="font-medium text-lg">{t.contact.phoneNumbers}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
                         Main Office:+91 8934856824<br />
-                        Customer Support: (123) 456-7891<br />
-                        Technical Help: (123) 456-7892
+                        Customer Support: +91 7870315732<br />
+                        Technical Help: +91 7479811994
                       </p> 
                     </div>
                   </div>
@@ -119,9 +119,9 @@ const Contact = () => {
                     <div>
                       <h3 className="font-medium text-lg">{t.contact.emailLabel}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
-                        General Inquiries: info@agriassist.com<br />
-                        Support: support@agriassist.com<br />
-                        Business: business@agriassist.com
+                        General Inquiries: satya246@gmail.com<br />
+                        Support:johnsonraj8051@gmail.com<br />
+                        Business: abhinandan234@gmial.com
                       </p>
                     </div>
                   </div>

@@ -12,14 +12,23 @@ const EXPENSE_CATS = ['Seeds','Fertilizer','Labor','Equipment','Irrigation','Pes
 const INCOME_CATS = ['Crop Sale','Subsidy','Rental','Other'];
 const COLORS = ['#4CAF50','#8BC34A','#CDDC39','#FFC107','#03A9F4','#9C27B0','#FF5722'];
 
+// Get unique storage key per user
+const getUserKey = () => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return `expenses_${user.email || 'guest'}`;
+  } catch { return 'expenses_guest'; }
+};
+
+const DEFAULT_ENTRIES: Entry[] = [];
+
 const ExpenseChart = () => {
-  const [entries, setEntries] = useState<Entry[]>([
-    { id: '1', label: 'Wheat Seeds', amount: 3200, type: 'expense', category: 'Seeds', month: 'Oct' },
-    { id: '2', label: 'DAP Fertilizer', amount: 4500, type: 'expense', category: 'Fertilizer', month: 'Oct' },
-    { id: '3', label: 'Harvest Labor', amount: 5000, type: 'expense', category: 'Labor', month: 'Mar' },
-    { id: '4', label: 'Wheat Sale', amount: 28000, type: 'income', category: 'Crop Sale', month: 'Apr' },
-    { id: '5', label: 'PM-KISAN', amount: 2000, type: 'income', category: 'Subsidy', month: 'Feb' },
-  ]);
+  const [entries, setEntries] = useState<Entry[]>(() => {
+    try {
+      const saved = localStorage.getItem(getUserKey());
+      return saved ? JSON.parse(saved) : DEFAULT_ENTRIES;
+    } catch { return DEFAULT_ENTRIES; }
+  });
   const [chartType, setChartType] = useState<'bar' | 'pie'>('bar');
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ label: '', amount: '', type: 'expense' as 'expense' | 'income', category: 'Seeds', month: 'Jan' });

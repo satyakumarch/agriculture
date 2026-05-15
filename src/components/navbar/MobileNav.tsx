@@ -25,7 +25,6 @@ const MobileNav = ({ isAuthenticated, user, mounted, handleLogout }: MobileNavPr
       items: [
         { to: '/seed-guide', label: '🌱 ' + t.nav.seedGuide },
         { to: '/weather',    label: '🌤️ ' + t.nav.weather },
-        { to: '/drone',      label: '🚁 Drone Intelligence' },
       ],
     },
     {
