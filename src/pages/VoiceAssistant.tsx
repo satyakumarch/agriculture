@@ -32,17 +32,65 @@ const knowledgeBase: Array<{ keywords: string[]; answer: string }> = [
   { keywords: ['crop rotation', 'rotation', 'intercrop', 'mixed', 'sequence'], answer: 'Crop rotation benefits and recommendations: 1) Wheat → Rice → Mustard: most common in North India, but depletes soil. 2) Better rotation: Wheat → Maize → Mustard or Wheat → Soybean → Wheat. 3) Legume rotation: include gram, soybean, or groundnut every 3rd season — fixes 40–80 kg N/acre naturally. 4) Intercropping: Wheat + Mustard (9:1 ratio), Cotton + Moong, Sugarcane + Garlic. 5) Benefits: breaks pest/disease cycles, improves soil health, reduces fertilizer costs by 20–30%.' },
 ];
 
-const getSmartResponse = (query: string): string => {
+const getSmartResponse = (query: string, langCode: string): string => {
   const lower = query.toLowerCase();
-  // Find best matching entry
   let bestMatch = { score: 0, answer: '' };
   for (const entry of knowledgeBase) {
     const score = entry.keywords.filter(kw => lower.includes(kw)).length;
     if (score > bestMatch.score) bestMatch = { score, answer: entry.answer };
   }
-  if (bestMatch.score > 0) return bestMatch.answer;
-  // Fallback with context
-  return `I understand you're asking about "${query}". For accurate farming advice, I can help with: irrigation schedules, fertilizer doses, pest control, disease identification, harvest timing, soil health, seed selection, weather planning, government schemes, and profit calculation. Please ask a more specific question like "When should I irrigate wheat?" or "What fertilizer for rice?" for detailed guidance.`;
+
+  // Translate response based on selected language
+  const translateToLang = (text: string, lang: string): string => {
+    if (lang.startsWith('en')) return text;
+
+    // Hindi responses
+    if (lang.startsWith('hi')) {
+      if (lower.includes('irrigat') || lower.includes('paani') || lower.includes('sinchai') || lower.includes('pani')) {
+        return 'सिंचाई का समय फसल और मिट्टी पर निर्भर करता है। गेहूं के लिए: CRI (21 दिन), कल्ले निकलते समय (45 दिन), जोड़ बनते समय (65 दिन), फूल आने पर (85 दिन), और दाना भरते समय (105 दिन) सिंचाई करें। चावल के लिए: वानस्पतिक अवस्था में 2-5 सेमी पानी बनाए रखें। सब्जियों के लिए: गर्मियों में हर 3-5 दिन, सर्दियों में हर 7-10 दिन सिंचाई करें। ड्रिप सिंचाई से 40-60% पानी बचता है। सुबह 5-8 बजे सिंचाई करें।';
+      }
+      if (lower.includes('fertilizer') || lower.includes('khad') || lower.includes('urea') || lower.includes('dap')) {
+        return 'उर्वरक सिफारिश: गेहूं — बुवाई पर DAP 50 किग्रा/एकड़, कल्ले निकलते समय यूरिया 25 किग्रा/एकड़। चावल — रोपाई पर DAP 50 किग्रा + MOP 20 किग्रा/एकड़, कल्ले निकलते समय यूरिया 30 किग्रा/एकड़। कपास — बुवाई पर NPK 12:32:16, फूल और टिंडे बनते समय यूरिया। उर्वरक लगाने से पहले हमेशा मिट्टी परीक्षण करवाएं।';
+      }
+      if (lower.includes('pest') || lower.includes('keet') || lower.includes('insect')) {
+        return 'एकीकृत कीट प्रबंधन (IPM): 1) हर हफ्ते 20 पौधे/एकड़ की जांच करें। 2) सफेद मक्खी और माहू के लिए पीले चिपचिपे जाल लगाएं। 3) नीम का तेल (5 मिली/लीटर पानी) 200+ कीटों को जैविक तरीके से नियंत्रित करता है। 4) कपास में बॉलवर्म के लिए Coragen 18.5 SC 60 मिली/एकड़ छिड़कें। 5) सुबह या शाम को छिड़काव करें।';
+      }
+      if (lower.includes('scheme') || lower.includes('yojana') || lower.includes('subsidy') || lower.includes('kisan')) {
+        return 'किसानों के लिए मुख्य सरकारी योजनाएं: 1) PM-KISAN: ₹6,000/वर्ष — pmkisan.gov.in पर पंजीकरण करें। 2) PMFBY: 1.5-5% प्रीमियम पर फसल बीमा। 3) किसान क्रेडिट कार्ड: 4% ब्याज पर ₹3 लाख तक ऋण। 4) PM कृषि सिंचाई योजना: ड्रिप/स्प्रिंकलर पर 55-90% सब्सिडी। 5) मृदा स्वास्थ्य कार्ड: मुफ्त मिट्टी परीक्षण।';
+      }
+      if (lower.includes('weather') || lower.includes('mausam') || lower.includes('rain') || lower.includes('barish')) {
+        return 'मौसम आधारित खेती सलाह: 1) सिंचाई से पहले 5 दिन का पूर्वानुमान देखें — बारिश से पहले सिंचाई न करें। 2) तेज हवा (15 किमी/घंटा से अधिक) या बारिश से पहले कीटनाशक न छिड़कें। 3) पाला पड़ने पर: 4°C से नीचे तापमान होने पर पौधों को प्लास्टिक से ढकें। 4) गर्मी में: 40°C से अधिक तापमान पर शाम को सिंचाई करें।';
+      }
+      return `आपने "${query}" के बारे में पूछा है। मैं आपकी मदद कर सकता हूं: सिंचाई, उर्वरक, कीट नियंत्रण, रोग पहचान, फसल कटाई, मिट्टी स्वास्थ्य, बीज चयन, मौसम योजना, सरकारी योजनाएं। कृपया अधिक विशिष्ट प्रश्न पूछें जैसे "गेहूं में कब सिंचाई करें?" या "चावल के लिए कौन सा खाद?"`;
+    }
+
+    // Punjabi responses
+    if (lang.startsWith('pa')) {
+      if (lower.includes('irrigat') || lower.includes('paani') || lower.includes('sinchai') || lower.includes('pani')) {
+        return 'ਸਿੰਚਾਈ ਦਾ ਸਮਾਂ ਫਸਲ ਅਤੇ ਮਿੱਟੀ ਉੱਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ। ਕਣਕ ਲਈ: CRI (21 ਦਿਨ), ਕਲੇ ਨਿਕਲਣ ਵੇਲੇ (45 ਦਿਨ), ਜੋੜ ਬਣਨ ਵੇਲੇ (65 ਦਿਨ), ਫੁੱਲ ਆਉਣ ਤੇ (85 ਦਿਨ) ਸਿੰਚਾਈ ਕਰੋ। ਡ੍ਰਿੱਪ ਸਿੰਚਾਈ ਨਾਲ 40-60% ਪਾਣੀ ਬਚਦਾ ਹੈ। ਸਵੇਰੇ 5-8 ਵਜੇ ਸਿੰਚਾਈ ਕਰੋ।';
+      }
+      if (lower.includes('scheme') || lower.includes('yojana') || lower.includes('subsidy')) {
+        return 'ਕਿਸਾਨਾਂ ਲਈ ਮੁੱਖ ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ: 1) PM-KISAN: ₹6,000/ਸਾਲ। 2) PMFBY: ਫਸਲ ਬੀਮਾ। 3) ਕਿਸਾਨ ਕ੍ਰੈਡਿਟ ਕਾਰਡ: 4% ਵਿਆਜ ਤੇ ₹3 ਲੱਖ ਤੱਕ ਕਰਜ਼ਾ। 4) PM ਕ੍ਰਿਸ਼ੀ ਸਿੰਚਾਈ ਯੋਜਨਾ: ਡ੍ਰਿੱਪ/ਸਪ੍ਰਿੰਕਲਰ ਤੇ 55-90% ਸਬਸਿਡੀ।';
+      }
+      return `ਤੁਸੀਂ "${query}" ਬਾਰੇ ਪੁੱਛਿਆ ਹੈ। ਮੈਂ ਤੁਹਾਡੀ ਮਦਦ ਕਰ ਸਕਦਾ ਹਾਂ: ਸਿੰਚਾਈ, ਖਾਦ, ਕੀਟ ਨਿਯੰਤਰਣ, ਮੌਸਮ, ਸਰਕਾਰੀ ਯੋਜਨਾਵਾਂ। ਕਿਰਪਾ ਕਰਕੇ ਵਧੇਰੇ ਖਾਸ ਸਵਾਲ ਪੁੱਛੋ।`;
+    }
+
+    // Nepali responses
+    if (lang.startsWith('ne')) {
+      if (lower.includes('irrigat') || lower.includes('paani') || lower.includes('sinchai') || lower.includes('pani')) {
+        return 'सिँचाइको समय बाली र माटोमा निर्भर गर्दछ। गहुँको लागि: CRI (२१ दिन), कल्ला निस्कँदा (४५ दिन), जोड बन्दा (६५ दिन), फूल फुल्दा (८५ दिन) सिँचाइ गर्नुहोस्। ड्रिप सिँचाइले ४०-६०% पानी बचाउँछ। बिहान ५-८ बजे सिँचाइ गर्नुहोस्।';
+      }
+      if (lower.includes('scheme') || lower.includes('yojana') || lower.includes('subsidy')) {
+        return 'किसानहरूका लागि मुख्य सरकारी योजनाहरू: १) PM-KISAN: ₹६,०००/वर्ष। २) PMFBY: बाली बीमा। ३) किसान क्रेडिट कार्ड: ४% ब्याजमा ₹३ लाखसम्म ऋण। ४) PM कृषि सिँचाइ योजना: ड्रिप/स्प्रिंकलरमा ५५-९०% अनुदान।';
+      }
+      return `तपाईंले "${query}" बारे सोध्नुभयो। म मद्दत गर्न सक्छु: सिँचाइ, मल, कीट नियन्त्रण, मौसम, सरकारी योजनाहरू। कृपया थप विशिष्ट प्रश्न सोध्नुहोस्।`;
+    }
+
+    return text; // English fallback
+  };
+
+  if (bestMatch.score > 0) return translateToLang(bestMatch.answer, langCode);
+  return translateToLang(`I understand you're asking about "${query}". For accurate farming advice, I can help with: irrigation schedules, fertilizer doses, pest control, disease identification, harvest timing, soil health, seed selection, weather planning, government schemes, and profit calculation. Please ask a more specific question like "When should I irrigate wheat?" or "What fertilizer for rice?" for detailed guidance.`, langCode);
 };
 
 interface Message { role: 'user' | 'assistant'; text: string; timestamp: Date; }
@@ -62,6 +110,20 @@ const VoiceAssistant = () => {
   const { toast } = useToast();
 
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+
+  // ── Stop speech when user navigates away ──────────────────────────────
+  useEffect(() => {
+    return () => {
+      window.speechSynthesis?.cancel();
+      recognitionRef.current?.stop();
+    };
+  }, []);
+
+  // ── Stop speech when language changes ─────────────────────────────────
+  useEffect(() => {
+    window.speechSynthesis?.cancel();
+    setIsSpeaking(false);
+  }, [selectedLang]);
 
   const startListening = () => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -90,8 +152,18 @@ const VoiceAssistant = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = selectedLang.code;
     utterance.rate = 0.85;
+
+    // Try to find a voice matching the selected language
+    const voices = window.speechSynthesis.getVoices();
+    const matchingVoice = voices.find(v => v.lang.startsWith(selectedLang.code.split('-')[0]))
+      || voices.find(v => v.lang === selectedLang.code)
+      || voices.find(v => v.lang.startsWith('hi')) // Hindi fallback for Indian languages
+      || null;
+    if (matchingVoice) utterance.voice = matchingVoice;
+
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
     window.speechSynthesis.speak(utterance);
   };
 
@@ -101,14 +173,20 @@ const VoiceAssistant = () => {
     setTranscript(''); setTextInput('');
     setIsProcessing(true);
     setTimeout(() => {
-      const response = getSmartResponse(text);
+      const response = getSmartResponse(text, selectedLang.code);
       setMessages(prev => [...prev, { role: 'assistant', text: response, timestamp: new Date() }]);
       setIsProcessing(false);
       speak(response);
     }, 700);
   };
 
-  const quickQuestions = ['When to irrigate wheat?', 'Fertilizer for rice', 'Pest control tips', 'Wheat harvest time', 'Soil pH correction', 'PM-KISAN scheme', 'Drip irrigation cost', 'Organic farming'];
+  const quickQuestions = selectedLang.code.startsWith('hi')
+    ? ['गेहूं में कब सिंचाई करें?', 'चावल के लिए खाद', 'कीट नियंत्रण', 'PM-KISAN योजना', 'मिट्टी pH सुधार', 'ड्रिप सिंचाई', 'जैविक खेती', 'फसल बीमा']
+    : selectedLang.code.startsWith('pa')
+    ? ['ਕਣਕ ਵਿੱਚ ਸਿੰਚਾਈ ਕਦੋਂ?', 'ਚਾਵਲ ਲਈ ਖਾਦ', 'ਕੀਟ ਨਿਯੰਤਰਣ', 'PM-KISAN ਯੋਜਨਾ', 'ਮਿੱਟੀ pH', 'ਡ੍ਰਿੱਪ ਸਿੰਚਾਈ', 'ਜੈਵਿਕ ਖੇਤੀ', 'ਫਸਲ ਬੀਮਾ']
+    : selectedLang.code.startsWith('ne')
+    ? ['गहुँमा सिँचाइ कहिले?', 'धानको लागि मल', 'कीट नियन्त्रण', 'PM-KISAN योजना', 'माटो pH', 'ड्रिप सिँचाइ', 'जैविक खेती', 'बाली बीमा']
+    : ['When to irrigate wheat?', 'Fertilizer for rice', 'Pest control tips', 'Wheat harvest time', 'Soil pH correction', 'PM-KISAN scheme', 'Drip irrigation cost', 'Organic farming'];
 
   return (
     <div className="min-h-screen flex flex-col">
