@@ -157,8 +157,23 @@ const Contact = () => {
 
             {/* Map Section */}
             <div className="mb-16">
-              <div className="bg-gray-200 dark:bg-gray-700 h-[400px] rounded-xl flex items-center justify-center">
-                <p className="text-gray-500 dark:text-gray-400">Map integration would be displayed here</p>
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-green-600" /> Our Location
+              </h3>
+              <div
+                className="rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700"
+                style={{ height: '450px' }}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3414.0539823498!2d75.70194931513!3d31.254600981452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5f5e9c489cf3%3A0x4049a5409d53c300!2sLovely%20Professional%20University!5e0!3m2!1sen!2sin!4v1716800000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="AgriAssist Location — Lovely Professional University, Phagwara"
+                />
               </div>
             </div>
           </div>

@@ -50,9 +50,7 @@ const getChatResponse = (q: string): string => {
 
 interface ChatMsg { role: 'user' | 'bot'; text: string; }
 
-const weatherData = { location: 'Agriville', date: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }), temperature: 24, weatherType: 'sunny' as const, humidity: 45, windSpeed: 8, precipitation: 0 };
 const mockSeedData = { id: 'seed-1', name: 'Premium Hybrid Corn', image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=80', season: 'Summer', soilType: ['Loamy', 'Sandy Loam'], waterNeeds: 'Medium' as const, growthPeriod: '90-120 days', idealTemp: '20-30°C', yieldEstimate: '8-10 tons/hectare', description: 'A high-yielding corn hybrid suitable for various soil types with excellent drought resistance and disease tolerance.', matchScore: 92 };
-const sensorData = { id: 'sensor-1', name: 'Soil Moisture', location: 'Field A, North', type: 'moisture' as const, value: 37, unit: '%', timestamp: new Date().toISOString(), batteryLevel: 84, signalStrength: 92, status: 'normal' as const };
 
 const Index = () => {
   const [chatOpen, setChatOpen] = useState(false);
@@ -81,7 +79,7 @@ const Index = () => {
       <div className="pt-6">
         <Hero />
         <FeaturesSection />
-        <DashboardPreviewSection weatherData={weatherData} sensorData={sensorData} seedData={mockSeedData} />
+        <DashboardPreviewSection seedData={mockSeedData} />
         <AdditionalFeaturesSection />
         <CTASection />
         <Footer />
