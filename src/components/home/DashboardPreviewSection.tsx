@@ -63,7 +63,7 @@ const DashboardPreviewSection = ({ seedData }: DashboardPreviewSectionProps) => 
                 ...seedData,
                 id: 'seed-3',
                 name: 'Organic Soybeans',
-                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Soybeanvarieties.jpg/640px-Soybeanvarieties.jpg',
+                image: 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=600&q=80',
                 season: 'Spring',
                 soilType: ['Loamy', 'Clayey'],
                 waterNeeds: 'Medium' as const,
